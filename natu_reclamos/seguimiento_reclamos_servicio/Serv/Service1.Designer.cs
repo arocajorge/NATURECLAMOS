@@ -1,6 +1,6 @@
 ﻿namespace Serv
 {
-    partial class ServicioAlertaReclamos
+    partial class ServicioAlertaMejoras
     {
         /// <summary> 
         /// Variable del diseñador necesaria.
@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             // 
-            // ServicioAlertaReclamos
+            // ServicioAlertaMejoras
             // 
             this.CanShutdown = true;
-            this.ServiceName = "ServicioAlertaReclamos";
+            this.ServiceName = "ServicioAlertaMejoras";
 
         }
 

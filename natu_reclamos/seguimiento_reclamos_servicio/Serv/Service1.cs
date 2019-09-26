@@ -15,12 +15,12 @@ using System.Timers;
 
 namespace Serv
 {
-    public partial class ServicioAlertaReclamos : ServiceBase
+    public partial class ServicioAlertaMejoras : ServiceBase
     {
         public static DateTime fecha_ult_ejecucion = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour, DateTime.Now.Minute, 0);
         public static bool ejecutado = false;
 
-        public ServicioAlertaReclamos()
+        public ServicioAlertaMejoras()
         {
             InitializeComponent();
         }
@@ -75,7 +75,7 @@ namespace Serv
 
                 if (list_quejas.Count == 0)
                 {
-                    Console.WriteLine("No existen reclamos sin atención");
+                    Console.WriteLine("No existen mejoras sin atención");
                     return;
                 }
 
@@ -93,13 +93,13 @@ namespace Serv
                         mail.To.Add(item.Trim());
                 }
                 mail.From = new MailAddress(info_param.correo_cuenta);
-                mail.Subject = "Alerta de seguimiento de reclamos no atendidos";
+                mail.Subject = "Alerta de seguimiento de mejoras no atendidas";
 
                 string Body = "";
-                Body += "<p> Acontinuación se detallan los reclamos sin atención </p><br>";
+                Body += "<p> Acontinuación se detallan las mejoras sin atención </p><br>";
                 Body += "<table border:'1'>";
                 Body += "<tr>";
-                Body += "<td><strong># Reclamo</strong></td>";
+                Body += "<td><strong># Mejora</strong></td>";
                 Body += "<td><strong>Mes</strong></td>";
                 Body += "<td><strong>Departamento</strong></td>";
                 Body += "<td><strong>Tipo</strong></td>";
@@ -140,7 +140,7 @@ namespace Serv
                 smtp.Send(mail);
                 #endregion
 
-                Console.WriteLine("Correo enviado satisfactoriamente, \n Conteo de quejas: " + list_quejas.Count);
+                Console.WriteLine("Correo enviado satisfactoriamente, \n Conteo de Mejoras: " + list_quejas.Count);
             }
             catch (Exception ex)
             {

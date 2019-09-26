@@ -17,7 +17,7 @@ namespace Serv
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[]
             {
-                new ServicioAlertaReclamos()
+                new ServicioAlertaMejoras()
             };
             ServiceBase.Run(ServicesToRun);
         }
