@@ -1,0 +1,51 @@
+@model info.reportes.tbl_reporte_Info
+@if (Model.lst_det_tipo != null)
+{
+    
+        <h3>Mejoras totales: @Model.lst_det_tipo.Sum(q => q.cantidad_quejas)</h3>
+    
+}
+@Html.DevExpress().Chart(settings =>
+{
+    settings.Name = "Chart_rpt1t";
+
+    settings.Width = 1200;
+    settings.Height = 400;
+    settings.BorderOptions.Visibility = DefaultBoolean.True;
+    settings.CrosshairEnabled = DefaultBoolean.False;
+    settings.AutoLayout = false;
+    settings.BorderOptions.Visibility = DefaultBoolean.False;
+    settings.Titles.Add(new ChartTitle()
+    {
+        Font = new System.Drawing.Font("Tahoma", 18),
+        Text = "Mejoras por Tipo"
+    });
+
+    settings.Series.Template(t =>
+    {
+        t.Views().SideBySideBarSeriesView(v =>
+        {
+            v.SeriesLabel(l =>
+            {
+                l.Position = BarSeriesLabelPosition.Top;
+                l.TextOrientation = TextOrientation.Horizontal;
+                l.ResolveOverlappingMode = ResolveOverlappingMode.Default;
+            });
+        });
+
+        t.SetDataMembers("qt_descripcion", "cantidad_quejas");
+        t.LabelsVisibility = DefaultBoolean.True;
+    });
+    settings.XYDiagram(d =>
+    {
+        d.AxisY.Interlaced = true;
+        d.AxisY.Title.Text = "Mejoras";
+        d.AxisY.Title.Visibility = DefaultBoolean.True;
+        d.AxisX.Label.Visible = true;
+        d.AxisX.QualitativeScaleOptions.AutoGrid = false;
+    });
+    settings.Legends.Default(l =>
+    {
+        l.Visibility = DefaultBoolean.False;
+    });
+}).Bind(Model.lst_det_tipo, seriesDataMember: "qt_descripcion").GetHtml()

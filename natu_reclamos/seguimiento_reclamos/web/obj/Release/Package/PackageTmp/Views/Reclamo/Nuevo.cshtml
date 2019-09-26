@@ -1,0 +1,189 @@
+﻿@model info.general.tbl_queja_Info
+
+@{
+    ViewBag.Title = "Nuevo";
+}
+
+@if (ViewBag.mensaje != null)
+{
+    <h2>@ViewBag.mensaje</h2>
+}
+
+@using (Html.BeginForm("Nuevo", "Reclamo", FormMethod.Post, new { @id = "form1"}))
+{
+        @Html.DevExpress().FormLayout(settings =>
+   {
+       settings.Name = "formLayout";
+       settings.EncodeHtml = false;
+       settings.UseDefaultPaddings = true;
+       settings.Width = Unit.Percentage(100);
+
+       var groupItem = settings.Items.AddGroupItem(i =>
+       {
+           i.Caption = "Nueva mejora";
+           i.SettingsItemHelpTexts.Position = HelpTextPosition.Bottom;
+       });
+       groupItem.Items.Add(m => m.qu_fecha, i =>
+       {
+           i.NestedExtension().DateEdit(s =>
+           {
+               s.Width = Unit.Pixel(100);
+               s.Properties.EditFormat = EditFormat.DateTime;
+               s.Properties.DisplayFormatString = "dd/MM/yyyy";
+           });
+       });
+       groupItem.Items.Add(m => m.IdQueja_estado, i =>
+       {
+           i.NestedExtension().ComboBox(s =>
+           {
+               s.Width = Unit.Percentage(100);
+               s.Properties.DataSource = ViewBag.lst_estado;
+               s.Properties.TextField = "qe_descripcion";
+               s.Properties.ValueField = "IdQueja_estado";
+               s.Properties.Columns.Add("qe_descripcion", "Estado");
+               s.Properties.NullText = "== Seleccione ==";
+           });
+       });
+       groupItem.Items.Add(m => m.IdSucursal, i =>
+       {
+           i.NestedExtension().ComboBox(s =>
+           {
+               s.Width = Unit.Percentage(100);
+               s.Properties.DataSource = ViewBag.lst_sucursal;
+               s.Properties.TextField = "su_descripcion";
+               s.Properties.ValueField = "IdSucursal";
+               s.Properties.Columns.Add("su_descripcion", "Sucursal");
+               s.Properties.NullText = "== Seleccione ==";
+           });
+       });
+       groupItem.Items.Add(m => m.IdDepartamento, i =>
+       {
+           i.NestedExtension().ComboBox(s =>
+           {
+               s.Width = Unit.Percentage(100);
+               s.Properties.DataSource = ViewBag.lst_departamento;
+               s.Properties.TextField = "de_descripcion";
+               s.Properties.ValueField = "IdDepartamento";
+               s.Properties.Columns.Add("de_descripcion", "Departamento");
+               s.Properties.NullText = "== Seleccione ==";
+           });
+       });
+       groupItem.Items.Add(m => m.IdQueja_canal, i =>
+       {
+           i.NestedExtension().ComboBox(s =>
+           {
+               s.Width = Unit.Percentage(100);
+               s.Properties.DataSource = ViewBag.lst_canal;
+               s.Properties.TextField = "qc_descripcion";
+               s.Properties.ValueField = "IdQueja_canal";
+               s.Properties.Columns.Add("qc_descripcion", "Canal");
+               s.Properties.NullText = "== Seleccione ==";
+           });
+       });
+       groupItem.Items.Add(m => m.IdQueja_origen, i =>
+       {
+           i.NestedExtension().ComboBox(s =>
+           {
+               s.Width = Unit.Percentage(100);
+               s.Properties.DataSource = ViewBag.lst_origen;
+               s.Properties.TextField = "qo_descripcion";
+               s.Properties.ValueField = "IdQueja_origen";
+               s.Properties.Columns.Add("qo_descripcion", "Origen");
+               s.Properties.NullText = "== Seleccione ==";
+           });
+       });
+       groupItem.Items.Add(m => m.IdQueja_tipo, i =>
+       {
+           i.NestedExtension().ComboBox(s =>
+           {
+               s.Properties.DataSource = ViewBag.lst_tipo;
+               s.Width = Unit.Percentage(100);
+               s.Properties.TextField = "qt_descripcion";
+               s.Properties.ValueField = "IdQueja_tipo";
+               s.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e) { IdQueja_motivo.PerformCallback({ IdQueja_tipo: s.GetValue() }); }";
+               s.Properties.NullText = "== Seleccione ==";
+           });
+       });
+       groupItem.Items.Add(m => m.IdQueja_motivo, i =>
+       {
+           i.SetNestedContent(() =>
+           {
+               Html.RenderPartial("_ComboBoxPartial_motivo_x_tipo");
+           });
+       });
+
+       groupItem.Items.Add(m => m.qu_detalle, i =>
+       {
+           i.NestedExtension().Memo(s =>
+           {
+               s.Width = Unit.Percentage(100);
+               s.Properties.Rows = 6;
+           });
+       });
+       groupItem.Items.Add(m => m.qu_solucion, i =>
+       {
+           i.NestedExtension().Memo(s =>
+           {
+               s.Width = Unit.Percentage(100);
+               s.Properties.Rows = 6;
+           });
+       });
+       groupItem.Items.Add(m => m.cl_nombre, i =>
+       {
+           i.NestedExtension().TextBox(s => s.Width = Unit.Percentage(100));
+       });
+       groupItem.Items.Add(m => m.cl_telefono, i =>
+       {
+           i.NestedExtension().TextBox(s => s.Width = Unit.Percentage(100));
+       });
+       groupItem.Items.Add(m => m.cl_correo, i =>
+       {
+           i.NestedExtension().TextBox(s => s.Width = Unit.Percentage(100));
+       });
+
+       groupItem.GroupBoxDecoration = GroupBoxDecoration.Box;
+       groupItem.ShowCaption = DefaultBoolean.True;
+       groupItem.SettingsItems.ShowCaption = DefaultBoolean.True;
+       groupItem.SettingsItemCaptions.Location = LayoutItemCaptionLocation.Top;
+       groupItem.SettingsItemCaptions.HorizontalAlign = FormLayoutHorizontalAlign.Left;
+       groupItem.SettingsItemCaptions.VerticalAlign = FormLayoutVerticalAlign.Top;
+
+       groupItem.Items.Add(i =>
+       {
+           i.Caption = "Adjuntar archivos";
+           i.NestedExtension().UploadControl(uc =>
+           {
+               uc.Name = "UploadControl";
+               uc.ShowUploadButton = false;
+               uc.ValidationSettings.Assign(web.Controllers.HomeControllerControllerUploadControlSettings.UploadControlValidationSettings);
+               uc.Width = Unit.Percentage(100);
+               uc.NullText = "== Seleccione los archivos ==";
+               uc.FileInputCount = 4;
+           });
+       });
+
+       groupItem.Items.Add(i =>
+       {
+           i.Caption = "";
+           i.Paddings.PaddingTop = 24;
+           i.SetNestedContent(() =>
+           {
+               Html.DevExpress().Button(b =>
+               {
+                   b.Name = "UpdateBtn";
+                   b.Text = "Guardar";
+                   b.ControlStyle.CssClass = "editFormButton";
+                   b.UseSubmitBehavior = true;
+               }).Render();
+               Html.DevExpress().Button(b =>
+               {
+                   b.Name = "CancelBtn";
+                   b.Text = "Cancelar";
+                   b.Style.Add("margin-left", "4px");
+                   b.ControlStyle.CssClass = "editFormButton";
+                   b.ClientSideEvents.Click = "function(s, e){ document.location='" + DevExpressHelper.GetUrl(new { Controller = "Reclamo", Action = "Index" }) + "'; }";
+               }).Render();
+           });
+       });
+   }).Bind(Model).GetHtml()
+}

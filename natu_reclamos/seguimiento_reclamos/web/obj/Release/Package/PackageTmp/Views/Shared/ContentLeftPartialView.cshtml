@@ -1,0 +1,41 @@
+<div class="leftPanel">
+    @* DXCOMMENT: Configure the left panel's menu *@
+    @Html.DevExpress().NavBar(settings => {
+    settings.Name = "LeftNavBar";
+    settings.ShowExpandButtons = false;
+    
+    settings.AutoCollapse = false;
+    settings.EnableAnimation = true;
+    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+    settings.ControlStyle.Border.BorderWidth = System.Web.UI.WebControls.Unit.Pixel(0);
+    settings.ControlStyle.Paddings.Padding = System.Web.UI.WebControls.Unit.Pixel(0);
+    settings.Groups.Add(group => {        
+        group.Text = "Mejoras";
+        group.Items.Add("Listado de mejoras").NavigateUrl = DevExpressHelper.GetUrl(new { Controller = "Reclamo", Action = "Index" });
+        if (@User.Identity.Name == "admin")
+        {
+            group.Items.Add("Usuarios").NavigateUrl = DevExpressHelper.GetUrl(new { Controller = "Account", Action = "Index" });
+            group.Items.Add("Parámetros correo").NavigateUrl = DevExpressHelper.GetUrl(new { Controller = "ParametroCorreo", Action = "Index" });
+        }
+        group.Items.Add("Sucursales").NavigateUrl = DevExpressHelper.GetUrl(new { Controller = "Sucursal", Action = "Index" });
+        group.Items.Add("Departamentos").NavigateUrl = DevExpressHelper.GetUrl(new { Controller = "Departamento", Action = "Index" });
+        group.Items.Add("Estados").NavigateUrl = DevExpressHelper.GetUrl(new { Controller = "Estado", Action = "Index" });
+        group.Items.Add("Canales").NavigateUrl = DevExpressHelper.GetUrl(new { Controller = "Canal", Action = "Index" }); ;
+        group.Items.Add("Origen de mejora").NavigateUrl = DevExpressHelper.GetUrl(new { Controller = "Origen", Action = "Index" });
+        group.Items.Add("Tipos de mejora").NavigateUrl = DevExpressHelper.GetUrl(new { Controller = "Tipo", Action = "Index" });
+    });
+    settings.Groups.Add(group =>
+    {
+        group.Text = "No conformidades";
+        group.Items.Add("Listado de no conformidad").NavigateUrl = DevExpressHelper.GetUrl(new { Controller = "NoConformidad", Action = "Index" });
+        group.Items.Add("Tipos de no conformidad").NavigateUrl = DevExpressHelper.GetUrl(new { Controller = "TipoNoConformidad", Action = "Index" });
+    });
+    settings.Groups.Add(group =>
+    {
+        group.Text = "Reportes";
+        group.Items.Add("Mejoras por sucursal").NavigateUrl = DevExpressHelper.GetUrl(new { Controller = "Reporte", Action = "Index" });
+        group.Items.Add("Mejoras por tipo").NavigateUrl = DevExpressHelper.GetUrl(new { Controller = "Reporte", Action = "Tipos" });
+        group.Items.Add("Mejoras por departamento").NavigateUrl = DevExpressHelper.GetUrl(new { Controller = "Reporte", Action = "Departamentos" });
+    });
+}).GetHtml()
+</div>

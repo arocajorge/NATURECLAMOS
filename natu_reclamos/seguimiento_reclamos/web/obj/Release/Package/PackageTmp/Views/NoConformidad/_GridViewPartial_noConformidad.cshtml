@@ -1,0 +1,49 @@
+@{
+    var grid = Html.DevExpress().GridView(settings => {
+        settings.Name = "GridView_noConformidad";
+        settings.CallbackRouteValues = new { Controller = "NoConformidad", Action = "GridViewPartial_noConformidad" };
+        settings.Width = Unit.Percentage(100);
+        settings.KeyFieldName = "IdNoConformidad";
+
+        settings.CommandColumn.Visible = false;
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = false;
+        settings.Settings.ShowFilterRow = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+        settings.Settings.ShowHeaderFilterButton = true;
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCells;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 500;
+        
+        settings.Columns.Add(c =>
+        {
+            c.Caption = "#";
+            c.SetDataItemTemplateContent(tc =>
+            {
+                ViewContext.Writer.Write(
+                Html.ActionLink("Modificar", "Modificar", new { IdNoConformidad = DataBinder.Eval(tc.DataItem, "IdNoConformidad") }) + "&nbsp;" +
+                        Html.ActionLink("Anular", "Anular", new { IdNoConformidad = DataBinder.Eval(tc.DataItem, "IdNoConformidad") },
+                            new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
+                    );
+            });            
+            c.Settings.AllowDragDrop = DefaultBoolean.False;
+            c.Settings.AllowSort = DefaultBoolean.False;
+            c.Width = Unit.Pixel(100);
+        });
+
+        settings.Columns.Add("IdNoConformidad").Width = Unit.Pixel(50);
+        settings.Columns.Add("info_tipo.nt_descripcion","Tipo").Width = Unit.Pixel(200);
+        settings.Columns.Add("IdQueja").Width = Unit.Pixel(50);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "nc_fecha";
+            column.Width = Unit.Pixel(75);
+            column.PropertiesEdit.DisplayFormatString = "d";
+            column.SettingsHeaderFilter.Mode = GridHeaderFilterMode.DateRangePicker;
+        });
+        settings.Columns.Add("nc_descripcion");
+    });
+}
+@grid.Bind(Model).GetHtml()

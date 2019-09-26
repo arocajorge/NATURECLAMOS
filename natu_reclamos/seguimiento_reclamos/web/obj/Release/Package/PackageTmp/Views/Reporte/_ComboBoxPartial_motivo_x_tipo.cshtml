@@ -1,0 +1,12 @@
+﻿@model info.reportes.tbl_reporte_Info
+@Html.DevExpress().ComboBoxFor(i => i.IdQueja_motivo, settings =>
+{
+    settings.Name = "IdQueja_motivo";
+    settings.Width = Unit.Percentage(100);
+    settings.CallbackRouteValues = new { Controller = "Reporte", Action = "ComboBoxPartial_motivo_x_tipo" };
+    settings.Properties.TextField = "qm_descripcion";
+    settings.Properties.ValueField = "IdQueja_motivo";
+    settings.Properties.Columns.Add("qm_descripcion", "Motivo");
+    settings.Properties.NullText = "== Seleccione ==";
+    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+}).BindList(ViewBag.lst_motivo).Bind(Model.IdQueja_motivo).GetHtml()

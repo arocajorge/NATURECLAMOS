@@ -1,0 +1,35 @@
+﻿@model info.general.tbl_reporte_no_conformidad_Info
+
+@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "lst_det";
+        settings.CallbackRouteValues = new { Controller = "NoConformidad", Action = "GridViewPartial_noConformidad_det", IdNoConformidad = Model == null ? 0 : Model.IdNoConformidad };
+        settings.Width = Unit.Percentage(100);
+        settings.KeyFieldName = "secuencia";
+
+        settings.SettingsEditing.Mode = GridViewEditingMode.Inline;
+        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "NoConformidad", Action = "EditingAddNew" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "NoConformidad", Action = "EditingUpdate" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "NoConformidad", Action = "EditingDelete" };
+
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowNewButton = true;
+        settings.CommandColumn.ShowDeleteButton = true;
+        settings.CommandColumn.ShowEditButton = true;
+
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = false;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCells;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 500;
+
+        settings.Columns.Add("nd_actividad","Actividad").Width = Unit.Percentage(60);
+        settings.Columns.Add("nd_plazo","Días plazo").Width = Unit.Percentage(10);
+        settings.Columns.Add("nd_responsable","Responsable").Width = Unit.Percentage(30);
+    });
+}
+@grid.Bind(Model.lst_det).GetHtml()

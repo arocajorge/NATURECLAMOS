@@ -1,0 +1,18 @@
+@model HeaderViewRenderMode
+
+@if(Model == HeaderViewRenderMode.Title) {
+    <div class="templateTitle">
+        @Html.ActionLink("Nueva mejora", "Nuevo", "Reclamo")
+    </div>
+} else { 
+    if(Model == HeaderViewRenderMode.Full) { 
+        <div class="headerTop">
+            <div class="templateTitle">
+                @Html.ActionLink("Nueva mejora", "Nuevo", "Reclamo")
+            </div>
+            <div class="loginControl">
+                @Html.Partial("LogOnPartialView")
+            </div>
+        </div>
+    }
+}
