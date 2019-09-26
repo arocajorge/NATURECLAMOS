@@ -1,0 +1,12 @@
+﻿@model info.general.tbl_queja_tipo_motivo_Info
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="templateTitle">
+    <h3>Listado de motivos</h3>
+</div>
+
+
+@Html.Action("GridViewPartial_motivo","Motivo",new { IdQueja_tipo = ViewBag.IdQueja_tipo})

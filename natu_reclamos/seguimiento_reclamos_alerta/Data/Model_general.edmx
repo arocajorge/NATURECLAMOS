@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model_general.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbl_parametros_correo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="correo_cuenta" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="correo_cuenta_destinatario" Type="varchar" MaxLength="5000" Nullable="false" />
+          <Property Name="correo_contrasenia" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="correo_asunto" Type="varchar" MaxLength="500" />
+          <Property Name="puerto" Type="int" Nullable="false" />
+          <Property Name="host" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="permitir_ssl" Type="bit" Nullable="false" />
+          <Property Name="enviar_correo_al_guardar_queja" Type="bit" Nullable="false" />
+          <Property Name="ftp_usuario" Type="varchar" MaxLength="200" />
+          <Property Name="ftp_contrasenia" Type="varchar" MaxLength="200" />
+          <Property Name="ftp_url" Type="varchar" MaxLength="400" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DB_QUEJAS.dbo.vwtbl_queja_alerta' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwtbl_queja_alerta">
+          <Key>
+            <PropertyRef Name="IdRow" />
+            <PropertyRef Name="IdQueja" />
+            <PropertyRef Name="me_descripcion" />
+            <PropertyRef Name="de_descripcion" />
+            <PropertyRef Name="qt_descripcion" />
+            <PropertyRef Name="qm_descripcion" />
+            <PropertyRef Name="su_descripcion" />
+            <PropertyRef Name="qc_descripcion" />
+            <PropertyRef Name="qe_descripcion" />
+            <PropertyRef Name="qo_descripcion" />
+            <PropertyRef Name="estado" />
+            <PropertyRef Name="qu_fecha" />
+          </Key>
+          <Property Name="IdRow" Type="bigint" Nullable="false" />
+          <Property Name="IdQueja" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="me_descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="de_descripcion" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="qt_descripcion" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="qm_descripcion" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="su_descripcion" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="qc_descripcion" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="qe_descripcion" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="qo_descripcion" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="estado" Type="bit" Nullable="false" />
+          <Property Name="qu_fecha" Type="datetime" Nullable="false" />
+          <Property Name="dias_sin_atencion" Type="int" />
+        </EntityType>
+        <EntityContainer Name="Model_generalStoreContainer">
+          <EntitySet Name="tbl_parametros_correo" EntityType="Self.tbl_parametros_correo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vwtbl_queja_alerta" EntityType="Self.vwtbl_queja_alerta" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwtbl_queja_alerta].[IdRow] AS [IdRow], 
+    [vwtbl_queja_alerta].[IdQueja] AS [IdQueja], 
+    [vwtbl_queja_alerta].[me_descripcion] AS [me_descripcion], 
+    [vwtbl_queja_alerta].[de_descripcion] AS [de_descripcion], 
+    [vwtbl_queja_alerta].[qt_descripcion] AS [qt_descripcion], 
+    [vwtbl_queja_alerta].[qm_descripcion] AS [qm_descripcion], 
+    [vwtbl_queja_alerta].[su_descripcion] AS [su_descripcion], 
+    [vwtbl_queja_alerta].[qc_descripcion] AS [qc_descripcion], 
+    [vwtbl_queja_alerta].[qe_descripcion] AS [qe_descripcion], 
+    [vwtbl_queja_alerta].[qo_descripcion] AS [qo_descripcion], 
+    [vwtbl_queja_alerta].[estado] AS [estado], 
+    [vwtbl_queja_alerta].[qu_fecha] AS [qu_fecha], 
+    [vwtbl_queja_alerta].[dias_sin_atencion] AS [dias_sin_atencion]
+    FROM [dbo].[vwtbl_queja_alerta] AS [vwtbl_queja_alerta]</DefiningQuery>
+          </EntitySet>
+          </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model_general" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tbl_parametros_correo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="correo_cuenta" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="correo_cuenta_destinatario" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="correo_contrasenia" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="correo_asunto" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="puerto" Type="Int32" Nullable="false" />
+          <Property Name="host" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="permitir_ssl" Type="Boolean" Nullable="false" />
+          <Property Name="enviar_correo_al_guardar_queja" Type="Boolean" Nullable="false" />
+          <Property Name="ftp_usuario" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ftp_contrasenia" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ftp_url" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="Entities_general" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbl_parametros_correo" EntityType="Self.tbl_parametros_correo" />
+          <EntitySet Name="vwtbl_queja_alerta" EntityType="Model_general.vwtbl_queja_alerta" />
+        </EntityContainer>
+        <EntityType Name="vwtbl_queja_alerta">
+          <Key>
+            <PropertyRef Name="IdRow" />
+            <PropertyRef Name="IdQueja" />
+            <PropertyRef Name="me_descripcion" />
+            <PropertyRef Name="de_descripcion" />
+            <PropertyRef Name="qt_descripcion" />
+            <PropertyRef Name="qm_descripcion" />
+            <PropertyRef Name="su_descripcion" />
+            <PropertyRef Name="qc_descripcion" />
+            <PropertyRef Name="qe_descripcion" />
+            <PropertyRef Name="qo_descripcion" />
+            <PropertyRef Name="estado" />
+            <PropertyRef Name="qu_fecha" />
+          </Key>
+          <Property Name="IdRow" Type="Int64" Nullable="false" />
+          <Property Name="IdQueja" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="me_descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="de_descripcion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="qt_descripcion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="qm_descripcion" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="su_descripcion" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="qc_descripcion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="qe_descripcion" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="qo_descripcion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="Boolean" Nullable="false" />
+          <Property Name="qu_fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="dias_sin_atencion" Type="Int32" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Model_generalStoreContainer" CdmEntityContainer="Entities_general">
+          <EntitySetMapping Name="tbl_parametros_correo">
+            <EntityTypeMapping TypeName="Model_general.tbl_parametros_correo">
+              <MappingFragment StoreEntitySet="tbl_parametros_correo">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="correo_cuenta" ColumnName="correo_cuenta" />
+                <ScalarProperty Name="correo_cuenta_destinatario" ColumnName="correo_cuenta_destinatario" />
+                <ScalarProperty Name="correo_contrasenia" ColumnName="correo_contrasenia" />
+                <ScalarProperty Name="correo_asunto" ColumnName="correo_asunto" />
+                <ScalarProperty Name="puerto" ColumnName="puerto" />
+                <ScalarProperty Name="host" ColumnName="host" />
+                <ScalarProperty Name="permitir_ssl" ColumnName="permitir_ssl" />
+                <ScalarProperty Name="enviar_correo_al_guardar_queja" ColumnName="enviar_correo_al_guardar_queja" />
+                <ScalarProperty Name="ftp_usuario" ColumnName="ftp_usuario" />
+                <ScalarProperty Name="ftp_contrasenia" ColumnName="ftp_contrasenia" />
+                <ScalarProperty Name="ftp_url" ColumnName="ftp_url" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwtbl_queja_alerta">
+            <EntityTypeMapping TypeName="Model_general.vwtbl_queja_alerta">
+              <MappingFragment StoreEntitySet="vwtbl_queja_alerta">
+                <ScalarProperty Name="dias_sin_atencion" ColumnName="dias_sin_atencion" />
+                <ScalarProperty Name="qu_fecha" ColumnName="qu_fecha" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="qo_descripcion" ColumnName="qo_descripcion" />
+                <ScalarProperty Name="qe_descripcion" ColumnName="qe_descripcion" />
+                <ScalarProperty Name="qc_descripcion" ColumnName="qc_descripcion" />
+                <ScalarProperty Name="su_descripcion" ColumnName="su_descripcion" />
+                <ScalarProperty Name="qm_descripcion" ColumnName="qm_descripcion" />
+                <ScalarProperty Name="qt_descripcion" ColumnName="qt_descripcion" />
+                <ScalarProperty Name="de_descripcion" ColumnName="de_descripcion" />
+                <ScalarProperty Name="me_descripcion" ColumnName="me_descripcion" />
+                <ScalarProperty Name="IdQueja" ColumnName="IdQueja" />
+                <ScalarProperty Name="IdRow" ColumnName="IdRow" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,18 @@
+﻿@model info.general.tbl_queja_Info
+
+@Html.DevExpress().ImageGallery(settings =>
+{
+    settings.Name = "imageGallery";
+    settings.Width = Unit.Percentage(100);
+    settings.CallbackRouteValues = new
+    {
+        Controller = "Reclamo",
+        Action = "Adjuntos",
+        ApplyWatermark = false,             
+    };
+    settings.FullscreenViewerThumbnailUrlField = "MediumImageUrl";
+    settings.ThumbnailUrlField = "MediumImageUrl";
+    settings.SettingsFullscreenViewer.ImageSizeMode = ImageSizeMode.ActualSizeOrFit;
+    settings.ThumbnailImageSizeMode = ImageSizeMode.ActualSizeOrFit;
+    settings.ImageUrlField = "MediumImageUrl";
+}).Bind(Model.lst_imagenes).GetHtml()

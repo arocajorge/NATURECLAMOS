@@ -1,0 +1,5 @@
+C:\Users\AROCA\Desktop\Proyectos GitHub\NATURECLAMOS\natu_reclamos\seguimiento_reclamos\info\bin\Debug\info.dll
+C:\Users\AROCA\Desktop\Proyectos GitHub\NATURECLAMOS\natu_reclamos\seguimiento_reclamos\info\bin\Debug\info.pdb
+C:\Users\AROCA\Desktop\Proyectos GitHub\NATURECLAMOS\natu_reclamos\seguimiento_reclamos\info\obj\Debug\info.csprojResolveAssemblyReference.cache
+C:\Users\AROCA\Desktop\Proyectos GitHub\NATURECLAMOS\natu_reclamos\seguimiento_reclamos\info\obj\Debug\info.dll
+C:\Users\AROCA\Desktop\Proyectos GitHub\NATURECLAMOS\natu_reclamos\seguimiento_reclamos\info\obj\Debug\info.pdb

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="eecfb47092a34292a547dd0b35f9f578" Name="Diagram1">
+        <EntityTypeShape EntityType="Model_general.tbl_departamento" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model_general.tbl_queja_canal" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model_general.tbl_queja_origen" Width="1.5" PointX="3" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model_general.tbl_queja_tipo" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model_general.tbl_queja_tipo_motivo" Width="1.5" PointX="3" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model_general.tbl_sucursal" Width="1.5" PointX="3" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model_general.tbl_usuario" Width="1.5" PointX="3" PointY="19.375" IsExpanded="true" />
+        <AssociationConnector Association="Model_general.FK_tbl_queja_tipo_motivo_tbl_queja_tipo" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Model_general.tbl_queja_estado" Width="1.5" PointX="3" PointY="7.5" />
+        <EntityTypeShape EntityType="Model_general.tbl_reporte_no_conformidad_det" Width="1.5" PointX="9.75" PointY="10.375" />
+        <EntityTypeShape EntityType="Model_general.tbl_reporte_no_conformidad_tipo" Width="1.5" PointX="5.25" PointY="5.625" />
+        <EntityTypeShape EntityType="Model_general.tbl_reporte_no_conformidad" Width="1.5" PointX="7.5" PointY="8.25" />
+        <AssociationConnector Association="Model_general.FK_tbl_reporte_no_conformidad_det_tbl_reporte_no_conformidad" />
+        <AssociationConnector Association="Model_general.FK_tbl_reporte_no_conformidad_tbl_reporte_no_conformidad_tipo" />
+        <EntityTypeShape EntityType="Model_general.tbl_mes" Width="1.5" PointX="3" PointY="23.5" />
+        <EntityTypeShape EntityType="Model_general.tbl_queja" Width="1.5" PointX="5.25" PointY="8.25" />
+        <AssociationConnector Association="Model_general.FK_tbl_queja_tbl_departamento" />
+        <AssociationConnector Association="Model_general.FK_tbl_queja_tbl_mes" />
+        <AssociationConnector Association="Model_general.FK_tbl_queja_tbl_queja_canal" />
+        <AssociationConnector Association="Model_general.FK_tbl_queja_tbl_queja_estado" />
+        <AssociationConnector Association="Model_general.FK_tbl_queja_tbl_queja_origen" />
+        <AssociationConnector Association="Model_general.FK_tbl_queja_tbl_queja_tipo" />
+        <AssociationConnector Association="Model_general.FK_tbl_queja_tbl_queja_tipo_motivo" />
+        <AssociationConnector Association="Model_general.FK_tbl_queja_tbl_sucursal" />
+        <AssociationConnector Association="Model_general.FK_tbl_queja_tbl_usuario" />
+        <AssociationConnector Association="Model_general.FK_tbl_reporte_no_conformidad_tbl_queja" />
+        <EntityTypeShape EntityType="Model_general.tbl_parametros_correo" Width="1.5" PointX="5.375" PointY="0.75" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

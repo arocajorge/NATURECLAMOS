@@ -1,0 +1,981 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model_general.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbl_departamento">
+          <Key>
+            <PropertyRef Name="IdDepartamento" />
+          </Key>
+          <Property Name="IdDepartamento" Type="int" Nullable="false" />
+          <Property Name="de_descripcion" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_mes">
+          <Key>
+            <PropertyRef Name="IdMes" />
+          </Key>
+          <Property Name="IdMes" Type="int" Nullable="false" />
+          <Property Name="me_descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="me_codigo" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="tbl_parametros_correo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="correo_cuenta" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="correo_cuenta_destinatario" Type="varchar(max)" Nullable="false" />
+          <Property Name="correo_contrasenia" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="correo_asunto" Type="varchar(max)" />
+          <Property Name="puerto" Type="int" Nullable="false" />
+          <Property Name="host" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="permitir_ssl" Type="bit" Nullable="false" />
+          <Property Name="enviar_correo_al_guardar_queja" Type="bit" Nullable="false" />
+          <Property Name="ftp_usuario" Type="varchar" MaxLength="200" />
+          <Property Name="ftp_contrasenia" Type="varchar" MaxLength="200" />
+          <Property Name="ftp_url" Type="varchar" MaxLength="400" />
+        </EntityType>
+        <EntityType Name="tbl_queja">
+          <Key>
+            <PropertyRef Name="IdQueja" />
+          </Key>
+          <Property Name="IdQueja" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdQueja_canal" Type="int" Nullable="false" />
+          <Property Name="IdQueja_origen" Type="int" Nullable="false" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="IdDepartamento" Type="int" Nullable="false" />
+          <Property Name="IdQueja_tipo" Type="int" Nullable="false" />
+          <Property Name="IdQueja_motivo" Type="int" Nullable="false" />
+          <Property Name="IdQueja_estado" Type="int" Nullable="false" />
+          <Property Name="qu_detalle" Type="varchar(max)" />
+          <Property Name="qu_solucion" Type="varchar(max)" />
+          <Property Name="qu_fecha" Type="datetime" Nullable="false" />
+          <Property Name="IdMes" Type="int" Nullable="false" />
+          <Property Name="qu_anio" Type="int" Nullable="false" />
+          <Property Name="cl_nombre" Type="varchar" MaxLength="500" />
+          <Property Name="cl_telefono" Type="varchar" MaxLength="200" />
+          <Property Name="cl_correo" Type="varchar" MaxLength="500" />
+          <Property Name="IdUsuario" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_queja_canal">
+          <Key>
+            <PropertyRef Name="IdQueja_canal" />
+          </Key>
+          <Property Name="IdQueja_canal" Type="int" Nullable="false" />
+          <Property Name="qc_descripcion" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_queja_estado">
+          <Key>
+            <PropertyRef Name="IdQueja_estado" />
+          </Key>
+          <Property Name="IdQueja_estado" Type="int" Nullable="false" />
+          <Property Name="qe_descripcion" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="qe_se_modifica" Type="bit" Nullable="false" />
+          <Property Name="estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_queja_origen">
+          <Key>
+            <PropertyRef Name="IdQueja_origen" />
+          </Key>
+          <Property Name="IdQueja_origen" Type="int" Nullable="false" />
+          <Property Name="qo_descripcion" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_queja_tipo">
+          <Key>
+            <PropertyRef Name="IdQueja_tipo" />
+          </Key>
+          <Property Name="IdQueja_tipo" Type="int" Nullable="false" />
+          <Property Name="qt_descripcion" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_queja_tipo_motivo">
+          <Key>
+            <PropertyRef Name="IdQueja_motivo" />
+          </Key>
+          <Property Name="IdQueja_motivo" Type="int" Nullable="false" />
+          <Property Name="IdQueja_tipo" Type="int" Nullable="false" />
+          <Property Name="qm_descripcion" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_reporte_no_conformidad">
+          <Key>
+            <PropertyRef Name="IdNoConformidad" />
+          </Key>
+          <Property Name="IdNoConformidad" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdNoConformidad_tipo" Type="int" Nullable="false" />
+          <Property Name="IdQueja" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="nc_fecha" Type="datetime" Nullable="false" />
+          <Property Name="nc_descripcion" Type="varchar" MaxLength="5000" Nullable="false" />
+          <Property Name="nc_causa" Type="varchar" MaxLength="5000" />
+          <Property Name="nc_cumplimiento" Type="varchar" MaxLength="5000" />
+          <Property Name="nc_verificacion" Type="varchar" MaxLength="5000" />
+          <Property Name="nc_fecha_verificacion" Type="datetime" />
+          <Property Name="IdUsuario" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_reporte_no_conformidad_det">
+          <Key>
+            <PropertyRef Name="IdNoConformidad" />
+            <PropertyRef Name="secuencia" />
+          </Key>
+          <Property Name="IdNoConformidad" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="secuencia" Type="int" Nullable="false" />
+          <Property Name="nd_actividad" Type="varchar" MaxLength="2000" Nullable="false" />
+          <Property Name="nd_plazo" Type="int" Nullable="false" />
+          <Property Name="nd_responsable" Type="varchar" MaxLength="400" />
+        </EntityType>
+        <EntityType Name="tbl_reporte_no_conformidad_tipo">
+          <Key>
+            <PropertyRef Name="IdNoConformidad_tipo" />
+          </Key>
+          <Property Name="IdNoConformidad_tipo" Type="int" Nullable="false" />
+          <Property Name="nt_descripcion" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_sucursal">
+          <Key>
+            <PropertyRef Name="IdSucursal" />
+          </Key>
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="su_codigo" Type="varchar" MaxLength="10" />
+          <Property Name="su_descripcion" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_usuario">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdUsuario" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="us_contrasenia" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="us_nombre" Type="varchar" MaxLength="500" />
+          <Property Name="us_estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_tbl_queja_tbl_departamento">
+          <End Role="tbl_departamento" Type="Self.tbl_departamento" Multiplicity="1" />
+          <End Role="tbl_queja" Type="Self.tbl_queja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_departamento">
+              <PropertyRef Name="IdDepartamento" />
+            </Principal>
+            <Dependent Role="tbl_queja">
+              <PropertyRef Name="IdDepartamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_queja_tbl_mes">
+          <End Role="tbl_mes" Type="Self.tbl_mes" Multiplicity="1" />
+          <End Role="tbl_queja" Type="Self.tbl_queja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_mes">
+              <PropertyRef Name="IdMes" />
+            </Principal>
+            <Dependent Role="tbl_queja">
+              <PropertyRef Name="IdMes" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_queja_tbl_queja_canal">
+          <End Role="tbl_queja_canal" Type="Self.tbl_queja_canal" Multiplicity="1" />
+          <End Role="tbl_queja" Type="Self.tbl_queja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_queja_canal">
+              <PropertyRef Name="IdQueja_canal" />
+            </Principal>
+            <Dependent Role="tbl_queja">
+              <PropertyRef Name="IdQueja_canal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_queja_tbl_queja_estado">
+          <End Role="tbl_queja_estado" Type="Self.tbl_queja_estado" Multiplicity="1" />
+          <End Role="tbl_queja" Type="Self.tbl_queja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_queja_estado">
+              <PropertyRef Name="IdQueja_estado" />
+            </Principal>
+            <Dependent Role="tbl_queja">
+              <PropertyRef Name="IdQueja_estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_queja_tbl_queja_origen">
+          <End Role="tbl_queja_origen" Type="Self.tbl_queja_origen" Multiplicity="1" />
+          <End Role="tbl_queja" Type="Self.tbl_queja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_queja_origen">
+              <PropertyRef Name="IdQueja_origen" />
+            </Principal>
+            <Dependent Role="tbl_queja">
+              <PropertyRef Name="IdQueja_origen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_queja_tbl_queja_tipo">
+          <End Role="tbl_queja_tipo" Type="Self.tbl_queja_tipo" Multiplicity="1" />
+          <End Role="tbl_queja" Type="Self.tbl_queja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_queja_tipo">
+              <PropertyRef Name="IdQueja_tipo" />
+            </Principal>
+            <Dependent Role="tbl_queja">
+              <PropertyRef Name="IdQueja_tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_queja_tbl_queja_tipo_motivo">
+          <End Role="tbl_queja_tipo_motivo" Type="Self.tbl_queja_tipo_motivo" Multiplicity="1" />
+          <End Role="tbl_queja" Type="Self.tbl_queja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_queja_tipo_motivo">
+              <PropertyRef Name="IdQueja_motivo" />
+            </Principal>
+            <Dependent Role="tbl_queja">
+              <PropertyRef Name="IdQueja_motivo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_queja_tbl_sucursal">
+          <End Role="tbl_sucursal" Type="Self.tbl_sucursal" Multiplicity="1" />
+          <End Role="tbl_queja" Type="Self.tbl_queja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_sucursal">
+              <PropertyRef Name="IdSucursal" />
+            </Principal>
+            <Dependent Role="tbl_queja">
+              <PropertyRef Name="IdSucursal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_queja_tbl_usuario">
+          <End Role="tbl_usuario" Type="Self.tbl_usuario" Multiplicity="1" />
+          <End Role="tbl_queja" Type="Self.tbl_queja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="tbl_queja">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_queja_tipo_motivo_tbl_queja_tipo">
+          <End Role="tbl_queja_tipo" Type="Self.tbl_queja_tipo" Multiplicity="1" />
+          <End Role="tbl_queja_tipo_motivo" Type="Self.tbl_queja_tipo_motivo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_queja_tipo">
+              <PropertyRef Name="IdQueja_tipo" />
+            </Principal>
+            <Dependent Role="tbl_queja_tipo_motivo">
+              <PropertyRef Name="IdQueja_tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_reporte_no_conformidad_det_tbl_reporte_no_conformidad">
+          <End Role="tbl_reporte_no_conformidad" Type="Self.tbl_reporte_no_conformidad" Multiplicity="1" />
+          <End Role="tbl_reporte_no_conformidad_det" Type="Self.tbl_reporte_no_conformidad_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_reporte_no_conformidad">
+              <PropertyRef Name="IdNoConformidad" />
+            </Principal>
+            <Dependent Role="tbl_reporte_no_conformidad_det">
+              <PropertyRef Name="IdNoConformidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_reporte_no_conformidad_tbl_queja">
+          <End Role="tbl_queja" Type="Self.tbl_queja" Multiplicity="1" />
+          <End Role="tbl_reporte_no_conformidad" Type="Self.tbl_reporte_no_conformidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_queja">
+              <PropertyRef Name="IdQueja" />
+            </Principal>
+            <Dependent Role="tbl_reporte_no_conformidad">
+              <PropertyRef Name="IdQueja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_reporte_no_conformidad_tbl_reporte_no_conformidad_tipo">
+          <End Role="tbl_reporte_no_conformidad_tipo" Type="Self.tbl_reporte_no_conformidad_tipo" Multiplicity="1" />
+          <End Role="tbl_reporte_no_conformidad" Type="Self.tbl_reporte_no_conformidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_reporte_no_conformidad_tipo">
+              <PropertyRef Name="IdNoConformidad_tipo" />
+            </Principal>
+            <Dependent Role="tbl_reporte_no_conformidad">
+              <PropertyRef Name="IdNoConformidad_tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Model_generalStoreContainer">
+          <EntitySet Name="tbl_departamento" EntityType="Self.tbl_departamento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_mes" EntityType="Self.tbl_mes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_parametros_correo" EntityType="Self.tbl_parametros_correo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_queja" EntityType="Self.tbl_queja" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_queja_canal" EntityType="Self.tbl_queja_canal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_queja_estado" EntityType="Self.tbl_queja_estado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_queja_origen" EntityType="Self.tbl_queja_origen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_queja_tipo" EntityType="Self.tbl_queja_tipo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_queja_tipo_motivo" EntityType="Self.tbl_queja_tipo_motivo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_reporte_no_conformidad" EntityType="Self.tbl_reporte_no_conformidad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_reporte_no_conformidad_det" EntityType="Self.tbl_reporte_no_conformidad_det" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_reporte_no_conformidad_tipo" EntityType="Self.tbl_reporte_no_conformidad_tipo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_sucursal" EntityType="Self.tbl_sucursal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_usuario" EntityType="Self.tbl_usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tbl_queja_tbl_departamento" Association="Self.FK_tbl_queja_tbl_departamento">
+            <End Role="tbl_departamento" EntitySet="tbl_departamento" />
+            <End Role="tbl_queja" EntitySet="tbl_queja" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_queja_tbl_mes" Association="Self.FK_tbl_queja_tbl_mes">
+            <End Role="tbl_mes" EntitySet="tbl_mes" />
+            <End Role="tbl_queja" EntitySet="tbl_queja" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_queja_tbl_queja_canal" Association="Self.FK_tbl_queja_tbl_queja_canal">
+            <End Role="tbl_queja_canal" EntitySet="tbl_queja_canal" />
+            <End Role="tbl_queja" EntitySet="tbl_queja" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_queja_tbl_queja_estado" Association="Self.FK_tbl_queja_tbl_queja_estado">
+            <End Role="tbl_queja_estado" EntitySet="tbl_queja_estado" />
+            <End Role="tbl_queja" EntitySet="tbl_queja" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_queja_tbl_queja_origen" Association="Self.FK_tbl_queja_tbl_queja_origen">
+            <End Role="tbl_queja_origen" EntitySet="tbl_queja_origen" />
+            <End Role="tbl_queja" EntitySet="tbl_queja" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_queja_tbl_queja_tipo" Association="Self.FK_tbl_queja_tbl_queja_tipo">
+            <End Role="tbl_queja_tipo" EntitySet="tbl_queja_tipo" />
+            <End Role="tbl_queja" EntitySet="tbl_queja" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_queja_tbl_queja_tipo_motivo" Association="Self.FK_tbl_queja_tbl_queja_tipo_motivo">
+            <End Role="tbl_queja_tipo_motivo" EntitySet="tbl_queja_tipo_motivo" />
+            <End Role="tbl_queja" EntitySet="tbl_queja" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_queja_tbl_sucursal" Association="Self.FK_tbl_queja_tbl_sucursal">
+            <End Role="tbl_sucursal" EntitySet="tbl_sucursal" />
+            <End Role="tbl_queja" EntitySet="tbl_queja" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_queja_tbl_usuario" Association="Self.FK_tbl_queja_tbl_usuario">
+            <End Role="tbl_usuario" EntitySet="tbl_usuario" />
+            <End Role="tbl_queja" EntitySet="tbl_queja" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_queja_tipo_motivo_tbl_queja_tipo" Association="Self.FK_tbl_queja_tipo_motivo_tbl_queja_tipo">
+            <End Role="tbl_queja_tipo" EntitySet="tbl_queja_tipo" />
+            <End Role="tbl_queja_tipo_motivo" EntitySet="tbl_queja_tipo_motivo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_reporte_no_conformidad_det_tbl_reporte_no_conformidad" Association="Self.FK_tbl_reporte_no_conformidad_det_tbl_reporte_no_conformidad">
+            <End Role="tbl_reporte_no_conformidad" EntitySet="tbl_reporte_no_conformidad" />
+            <End Role="tbl_reporte_no_conformidad_det" EntitySet="tbl_reporte_no_conformidad_det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_reporte_no_conformidad_tbl_queja" Association="Self.FK_tbl_reporte_no_conformidad_tbl_queja">
+            <End Role="tbl_queja" EntitySet="tbl_queja" />
+            <End Role="tbl_reporte_no_conformidad" EntitySet="tbl_reporte_no_conformidad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_reporte_no_conformidad_tbl_reporte_no_conformidad_tipo" Association="Self.FK_tbl_reporte_no_conformidad_tbl_reporte_no_conformidad_tipo">
+            <End Role="tbl_reporte_no_conformidad_tipo" EntitySet="tbl_reporte_no_conformidad_tipo" />
+            <End Role="tbl_reporte_no_conformidad" EntitySet="tbl_reporte_no_conformidad" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model_general" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tbl_departamento">
+          <Key>
+            <PropertyRef Name="IdDepartamento" />
+          </Key>
+          <Property Name="IdDepartamento" Type="Int32" Nullable="false" />
+          <Property Name="de_descripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tbl_queja" Relationship="Model_general.FK_tbl_queja_tbl_departamento" FromRole="tbl_departamento" ToRole="tbl_queja" />
+        </EntityType>
+        <EntityType Name="tbl_queja_canal">
+          <Key>
+            <PropertyRef Name="IdQueja_canal" />
+          </Key>
+          <Property Name="IdQueja_canal" Type="Int32" Nullable="false" />
+          <Property Name="qc_descripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tbl_queja" Relationship="Model_general.FK_tbl_queja_tbl_queja_canal" FromRole="tbl_queja_canal" ToRole="tbl_queja" />
+        </EntityType>
+        <EntityType Name="tbl_queja_origen">
+          <Key>
+            <PropertyRef Name="IdQueja_origen" />
+          </Key>
+          <Property Name="IdQueja_origen" Type="Int32" Nullable="false" />
+          <Property Name="qo_descripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tbl_queja" Relationship="Model_general.FK_tbl_queja_tbl_queja_origen" FromRole="tbl_queja_origen" ToRole="tbl_queja" />
+        </EntityType>
+        <EntityType Name="tbl_queja_tipo">
+          <Key>
+            <PropertyRef Name="IdQueja_tipo" />
+          </Key>
+          <Property Name="IdQueja_tipo" Type="Int32" Nullable="false" />
+          <Property Name="qt_descripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tbl_queja_tipo_motivo" Relationship="Self.FK_tbl_queja_tipo_motivo_tbl_queja_tipo" FromRole="tbl_queja_tipo" ToRole="tbl_queja_tipo_motivo" />
+          <NavigationProperty Name="tbl_queja" Relationship="Model_general.FK_tbl_queja_tbl_queja_tipo" FromRole="tbl_queja_tipo" ToRole="tbl_queja" />
+        </EntityType>
+        <EntityType Name="tbl_queja_tipo_motivo">
+          <Key>
+            <PropertyRef Name="IdQueja_motivo" />
+          </Key>
+          <Property Name="IdQueja_motivo" Type="Int32" Nullable="false" />
+          <Property Name="IdQueja_tipo" Type="Int32" Nullable="false" />
+          <Property Name="qm_descripcion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tbl_queja_tipo" Relationship="Self.FK_tbl_queja_tipo_motivo_tbl_queja_tipo" FromRole="tbl_queja_tipo_motivo" ToRole="tbl_queja_tipo" />
+          <NavigationProperty Name="tbl_queja" Relationship="Model_general.FK_tbl_queja_tbl_queja_tipo_motivo" FromRole="tbl_queja_tipo_motivo" ToRole="tbl_queja" />
+        </EntityType>
+        <EntityType Name="tbl_sucursal">
+          <Key>
+            <PropertyRef Name="IdSucursal" />
+          </Key>
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="su_codigo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="su_descripcion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tbl_queja" Relationship="Model_general.FK_tbl_queja_tbl_sucursal" FromRole="tbl_sucursal" ToRole="tbl_queja" />
+        </EntityType>
+        <EntityType Name="tbl_usuario">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="us_contrasenia" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="us_nombre" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="us_estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tbl_queja" Relationship="Model_general.FK_tbl_queja_tbl_usuario" FromRole="tbl_usuario" ToRole="tbl_queja" />
+        </EntityType>
+        <Association Name="FK_tbl_queja_tipo_motivo_tbl_queja_tipo">
+          <End Role="tbl_queja_tipo" Type="Self.tbl_queja_tipo" Multiplicity="1" />
+          <End Role="tbl_queja_tipo_motivo" Type="Self.tbl_queja_tipo_motivo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_queja_tipo">
+              <PropertyRef Name="IdQueja_tipo" />
+            </Principal>
+            <Dependent Role="tbl_queja_tipo_motivo">
+              <PropertyRef Name="IdQueja_tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities_general" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbl_departamento" EntityType="Self.tbl_departamento" />
+          <EntitySet Name="tbl_queja_canal" EntityType="Self.tbl_queja_canal" />
+          <EntitySet Name="tbl_queja_origen" EntityType="Self.tbl_queja_origen" />
+          <EntitySet Name="tbl_queja_tipo" EntityType="Self.tbl_queja_tipo" />
+          <EntitySet Name="tbl_queja_tipo_motivo" EntityType="Self.tbl_queja_tipo_motivo" />
+          <EntitySet Name="tbl_sucursal" EntityType="Self.tbl_sucursal" />
+          <EntitySet Name="tbl_usuario" EntityType="Self.tbl_usuario" />
+          <AssociationSet Name="FK_tbl_queja_tipo_motivo_tbl_queja_tipo" Association="Self.FK_tbl_queja_tipo_motivo_tbl_queja_tipo">
+            <End Role="tbl_queja_tipo" EntitySet="tbl_queja_tipo" />
+            <End Role="tbl_queja_tipo_motivo" EntitySet="tbl_queja_tipo_motivo" />
+          </AssociationSet>
+          <EntitySet Name="tbl_queja_estado" EntityType="Model_general.tbl_queja_estado" />
+          <EntitySet Name="tbl_reporte_no_conformidad_det" EntityType="Model_general.tbl_reporte_no_conformidad_det" />
+          <EntitySet Name="tbl_reporte_no_conformidad_tipo" EntityType="Model_general.tbl_reporte_no_conformidad_tipo" />
+          <EntitySet Name="tbl_reporte_no_conformidad" EntityType="Model_general.tbl_reporte_no_conformidad" />
+          <AssociationSet Name="FK_tbl_reporte_no_conformidad_det_tbl_reporte_no_conformidad" Association="Model_general.FK_tbl_reporte_no_conformidad_det_tbl_reporte_no_conformidad">
+            <End Role="tbl_reporte_no_conformidad" EntitySet="tbl_reporte_no_conformidad" />
+            <End Role="tbl_reporte_no_conformidad_det" EntitySet="tbl_reporte_no_conformidad_det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_reporte_no_conformidad_tbl_reporte_no_conformidad_tipo" Association="Model_general.FK_tbl_reporte_no_conformidad_tbl_reporte_no_conformidad_tipo">
+            <End Role="tbl_reporte_no_conformidad_tipo" EntitySet="tbl_reporte_no_conformidad_tipo" />
+            <End Role="tbl_reporte_no_conformidad" EntitySet="tbl_reporte_no_conformidad" />
+          </AssociationSet>
+          <EntitySet Name="tbl_mes" EntityType="Model_general.tbl_mes" />
+          <EntitySet Name="tbl_queja" EntityType="Model_general.tbl_queja" />
+          <AssociationSet Name="FK_tbl_queja_tbl_departamento" Association="Model_general.FK_tbl_queja_tbl_departamento">
+            <End Role="tbl_departamento" EntitySet="tbl_departamento" />
+            <End Role="tbl_queja" EntitySet="tbl_queja" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_queja_tbl_mes" Association="Model_general.FK_tbl_queja_tbl_mes">
+            <End Role="tbl_mes" EntitySet="tbl_mes" />
+            <End Role="tbl_queja" EntitySet="tbl_queja" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_queja_tbl_queja_canal" Association="Model_general.FK_tbl_queja_tbl_queja_canal">
+            <End Role="tbl_queja_canal" EntitySet="tbl_queja_canal" />
+            <End Role="tbl_queja" EntitySet="tbl_queja" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_queja_tbl_queja_estado" Association="Model_general.FK_tbl_queja_tbl_queja_estado">
+            <End Role="tbl_queja_estado" EntitySet="tbl_queja_estado" />
+            <End Role="tbl_queja" EntitySet="tbl_queja" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_queja_tbl_queja_origen" Association="Model_general.FK_tbl_queja_tbl_queja_origen">
+            <End Role="tbl_queja_origen" EntitySet="tbl_queja_origen" />
+            <End Role="tbl_queja" EntitySet="tbl_queja" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_queja_tbl_queja_tipo" Association="Model_general.FK_tbl_queja_tbl_queja_tipo">
+            <End Role="tbl_queja_tipo" EntitySet="tbl_queja_tipo" />
+            <End Role="tbl_queja" EntitySet="tbl_queja" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_queja_tbl_queja_tipo_motivo" Association="Model_general.FK_tbl_queja_tbl_queja_tipo_motivo">
+            <End Role="tbl_queja_tipo_motivo" EntitySet="tbl_queja_tipo_motivo" />
+            <End Role="tbl_queja" EntitySet="tbl_queja" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_queja_tbl_sucursal" Association="Model_general.FK_tbl_queja_tbl_sucursal">
+            <End Role="tbl_sucursal" EntitySet="tbl_sucursal" />
+            <End Role="tbl_queja" EntitySet="tbl_queja" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_queja_tbl_usuario" Association="Model_general.FK_tbl_queja_tbl_usuario">
+            <End Role="tbl_usuario" EntitySet="tbl_usuario" />
+            <End Role="tbl_queja" EntitySet="tbl_queja" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_reporte_no_conformidad_tbl_queja" Association="Model_general.FK_tbl_reporte_no_conformidad_tbl_queja">
+            <End Role="tbl_queja" EntitySet="tbl_queja" />
+            <End Role="tbl_reporte_no_conformidad" EntitySet="tbl_reporte_no_conformidad" />
+          </AssociationSet>
+          <EntitySet Name="tbl_parametros_correo" EntityType="Model_general.tbl_parametros_correo" />
+          </EntityContainer>
+        <EntityType Name="tbl_queja_estado">
+          <Key>
+            <PropertyRef Name="IdQueja_estado" />
+          </Key>
+          <Property Name="IdQueja_estado" Type="Int32" Nullable="false" />
+          <Property Name="qe_descripcion" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="qe_se_modifica" Type="Boolean" Nullable="false" />
+          <Property Name="estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tbl_queja" Relationship="Model_general.FK_tbl_queja_tbl_queja_estado" FromRole="tbl_queja_estado" ToRole="tbl_queja" />
+        </EntityType>
+        <EntityType Name="tbl_reporte_no_conformidad_det">
+          <Key>
+            <PropertyRef Name="IdNoConformidad" />
+            <PropertyRef Name="secuencia" />
+          </Key>
+          <Property Name="IdNoConformidad" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="secuencia" Type="Int32" Nullable="false" />
+          <Property Name="nd_actividad" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="nd_plazo" Type="Int32" Nullable="false" />
+          <Property Name="nd_responsable" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbl_reporte_no_conformidad" Relationship="Model_general.FK_tbl_reporte_no_conformidad_det_tbl_reporte_no_conformidad" FromRole="tbl_reporte_no_conformidad_det" ToRole="tbl_reporte_no_conformidad" />
+        </EntityType>
+        <EntityType Name="tbl_reporte_no_conformidad_tipo">
+          <Key>
+            <PropertyRef Name="IdNoConformidad_tipo" />
+          </Key>
+          <Property Name="IdNoConformidad_tipo" Type="Int32" Nullable="false" />
+          <Property Name="nt_descripcion" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tbl_reporte_no_conformidad" Relationship="Model_general.FK_tbl_reporte_no_conformidad_tbl_reporte_no_conformidad_tipo" FromRole="tbl_reporte_no_conformidad_tipo" ToRole="tbl_reporte_no_conformidad" />
+        </EntityType>
+        <EntityType Name="tbl_reporte_no_conformidad">
+          <Key>
+            <PropertyRef Name="IdNoConformidad" />
+          </Key>
+          <Property Name="IdNoConformidad" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdNoConformidad_tipo" Type="Int32" Nullable="false" />
+          <Property Name="IdQueja" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="nc_fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="nc_descripcion" Type="String" Nullable="false" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Name="nc_causa" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Name="nc_cumplimiento" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Name="nc_verificacion" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Name="nc_fecha_verificacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tbl_reporte_no_conformidad_det" Relationship="Model_general.FK_tbl_reporte_no_conformidad_det_tbl_reporte_no_conformidad" FromRole="tbl_reporte_no_conformidad" ToRole="tbl_reporte_no_conformidad_det" />
+          <NavigationProperty Name="tbl_reporte_no_conformidad_tipo" Relationship="Model_general.FK_tbl_reporte_no_conformidad_tbl_reporte_no_conformidad_tipo" FromRole="tbl_reporte_no_conformidad" ToRole="tbl_reporte_no_conformidad_tipo" />
+          <NavigationProperty Name="tbl_queja" Relationship="Model_general.FK_tbl_reporte_no_conformidad_tbl_queja" FromRole="tbl_reporte_no_conformidad" ToRole="tbl_queja" />
+        </EntityType>
+        <Association Name="FK_tbl_reporte_no_conformidad_det_tbl_reporte_no_conformidad">
+          <End Type="Model_general.tbl_reporte_no_conformidad" Role="tbl_reporte_no_conformidad" Multiplicity="1" />
+          <End Type="Model_general.tbl_reporte_no_conformidad_det" Role="tbl_reporte_no_conformidad_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_reporte_no_conformidad">
+              <PropertyRef Name="IdNoConformidad" />
+            </Principal>
+            <Dependent Role="tbl_reporte_no_conformidad_det">
+              <PropertyRef Name="IdNoConformidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_reporte_no_conformidad_tbl_reporte_no_conformidad_tipo">
+          <End Type="Model_general.tbl_reporte_no_conformidad_tipo" Role="tbl_reporte_no_conformidad_tipo" Multiplicity="1" />
+          <End Type="Model_general.tbl_reporte_no_conformidad" Role="tbl_reporte_no_conformidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_reporte_no_conformidad_tipo">
+              <PropertyRef Name="IdNoConformidad_tipo" />
+            </Principal>
+            <Dependent Role="tbl_reporte_no_conformidad">
+              <PropertyRef Name="IdNoConformidad_tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tbl_mes">
+          <Key>
+            <PropertyRef Name="IdMes" />
+          </Key>
+          <Property Name="IdMes" Type="Int32" Nullable="false" />
+          <Property Name="me_descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="me_codigo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbl_queja" Relationship="Model_general.FK_tbl_queja_tbl_mes" FromRole="tbl_mes" ToRole="tbl_queja" />
+        </EntityType>
+        <EntityType Name="tbl_queja">
+          <Key>
+            <PropertyRef Name="IdQueja" />
+          </Key>
+          <Property Name="IdQueja" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdQueja_canal" Type="Int32" Nullable="false" />
+          <Property Name="IdQueja_origen" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdDepartamento" Type="Int32" Nullable="false" />
+          <Property Name="IdQueja_tipo" Type="Int32" Nullable="false" />
+          <Property Name="IdQueja_motivo" Type="Int32" Nullable="false" />
+          <Property Name="IdQueja_estado" Type="Int32" Nullable="false" />
+          <Property Name="qu_detalle" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="qu_solucion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="qu_fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IdMes" Type="Int32" Nullable="false" />
+          <Property Name="qu_anio" Type="Int32" Nullable="false" />
+          <Property Name="cl_nombre" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="cl_telefono" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="cl_correo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tbl_departamento" Relationship="Model_general.FK_tbl_queja_tbl_departamento" FromRole="tbl_queja" ToRole="tbl_departamento" />
+          <NavigationProperty Name="tbl_mes" Relationship="Model_general.FK_tbl_queja_tbl_mes" FromRole="tbl_queja" ToRole="tbl_mes" />
+          <NavigationProperty Name="tbl_queja_canal" Relationship="Model_general.FK_tbl_queja_tbl_queja_canal" FromRole="tbl_queja" ToRole="tbl_queja_canal" />
+          <NavigationProperty Name="tbl_queja_estado" Relationship="Model_general.FK_tbl_queja_tbl_queja_estado" FromRole="tbl_queja" ToRole="tbl_queja_estado" />
+          <NavigationProperty Name="tbl_queja_origen" Relationship="Model_general.FK_tbl_queja_tbl_queja_origen" FromRole="tbl_queja" ToRole="tbl_queja_origen" />
+          <NavigationProperty Name="tbl_queja_tipo" Relationship="Model_general.FK_tbl_queja_tbl_queja_tipo" FromRole="tbl_queja" ToRole="tbl_queja_tipo" />
+          <NavigationProperty Name="tbl_queja_tipo_motivo" Relationship="Model_general.FK_tbl_queja_tbl_queja_tipo_motivo" FromRole="tbl_queja" ToRole="tbl_queja_tipo_motivo" />
+          <NavigationProperty Name="tbl_sucursal" Relationship="Model_general.FK_tbl_queja_tbl_sucursal" FromRole="tbl_queja" ToRole="tbl_sucursal" />
+          <NavigationProperty Name="tbl_usuario" Relationship="Model_general.FK_tbl_queja_tbl_usuario" FromRole="tbl_queja" ToRole="tbl_usuario" />
+          <NavigationProperty Name="tbl_reporte_no_conformidad" Relationship="Model_general.FK_tbl_reporte_no_conformidad_tbl_queja" FromRole="tbl_queja" ToRole="tbl_reporte_no_conformidad" />
+        </EntityType>
+        <Association Name="FK_tbl_queja_tbl_departamento">
+          <End Type="Model_general.tbl_departamento" Role="tbl_departamento" Multiplicity="1" />
+          <End Type="Model_general.tbl_queja" Role="tbl_queja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_departamento">
+              <PropertyRef Name="IdDepartamento" />
+            </Principal>
+            <Dependent Role="tbl_queja">
+              <PropertyRef Name="IdDepartamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_queja_tbl_mes">
+          <End Type="Model_general.tbl_mes" Role="tbl_mes" Multiplicity="1" />
+          <End Type="Model_general.tbl_queja" Role="tbl_queja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_mes">
+              <PropertyRef Name="IdMes" />
+            </Principal>
+            <Dependent Role="tbl_queja">
+              <PropertyRef Name="IdMes" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_queja_tbl_queja_canal">
+          <End Type="Model_general.tbl_queja_canal" Role="tbl_queja_canal" Multiplicity="1" />
+          <End Type="Model_general.tbl_queja" Role="tbl_queja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_queja_canal">
+              <PropertyRef Name="IdQueja_canal" />
+            </Principal>
+            <Dependent Role="tbl_queja">
+              <PropertyRef Name="IdQueja_canal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_queja_tbl_queja_estado">
+          <End Type="Model_general.tbl_queja_estado" Role="tbl_queja_estado" Multiplicity="1" />
+          <End Type="Model_general.tbl_queja" Role="tbl_queja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_queja_estado">
+              <PropertyRef Name="IdQueja_estado" />
+            </Principal>
+            <Dependent Role="tbl_queja">
+              <PropertyRef Name="IdQueja_estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_queja_tbl_queja_origen">
+          <End Type="Model_general.tbl_queja_origen" Role="tbl_queja_origen" Multiplicity="1" />
+          <End Type="Model_general.tbl_queja" Role="tbl_queja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_queja_origen">
+              <PropertyRef Name="IdQueja_origen" />
+            </Principal>
+            <Dependent Role="tbl_queja">
+              <PropertyRef Name="IdQueja_origen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_queja_tbl_queja_tipo">
+          <End Type="Model_general.tbl_queja_tipo" Role="tbl_queja_tipo" Multiplicity="1" />
+          <End Type="Model_general.tbl_queja" Role="tbl_queja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_queja_tipo">
+              <PropertyRef Name="IdQueja_tipo" />
+            </Principal>
+            <Dependent Role="tbl_queja">
+              <PropertyRef Name="IdQueja_tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_queja_tbl_queja_tipo_motivo">
+          <End Type="Model_general.tbl_queja_tipo_motivo" Role="tbl_queja_tipo_motivo" Multiplicity="1" />
+          <End Type="Model_general.tbl_queja" Role="tbl_queja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_queja_tipo_motivo">
+              <PropertyRef Name="IdQueja_motivo" />
+            </Principal>
+            <Dependent Role="tbl_queja">
+              <PropertyRef Name="IdQueja_motivo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_queja_tbl_sucursal">
+          <End Type="Model_general.tbl_sucursal" Role="tbl_sucursal" Multiplicity="1" />
+          <End Type="Model_general.tbl_queja" Role="tbl_queja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_sucursal">
+              <PropertyRef Name="IdSucursal" />
+            </Principal>
+            <Dependent Role="tbl_queja">
+              <PropertyRef Name="IdSucursal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_queja_tbl_usuario">
+          <End Type="Model_general.tbl_usuario" Role="tbl_usuario" Multiplicity="1" />
+          <End Type="Model_general.tbl_queja" Role="tbl_queja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="tbl_queja">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_reporte_no_conformidad_tbl_queja">
+          <End Type="Model_general.tbl_queja" Role="tbl_queja" Multiplicity="1" />
+          <End Type="Model_general.tbl_reporte_no_conformidad" Role="tbl_reporte_no_conformidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_queja">
+              <PropertyRef Name="IdQueja" />
+            </Principal>
+            <Dependent Role="tbl_reporte_no_conformidad">
+              <PropertyRef Name="IdQueja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tbl_parametros_correo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="correo_cuenta" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="correo_cuenta_destinatario" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="correo_contrasenia" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="correo_asunto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="puerto" Type="Int32" Nullable="false" />
+          <Property Name="host" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="permitir_ssl" Type="Boolean" Nullable="false" />
+          <Property Name="enviar_correo_al_guardar_queja" Type="Boolean" Nullable="false" />
+          <Property Name="ftp_usuario" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ftp_contrasenia" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ftp_url" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Model_generalStoreContainer" CdmEntityContainer="Entities_general">
+          <EntitySetMapping Name="tbl_departamento">
+            <EntityTypeMapping TypeName="Model_general.tbl_departamento">
+              <MappingFragment StoreEntitySet="tbl_departamento">
+                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+                <ScalarProperty Name="de_descripcion" ColumnName="de_descripcion" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_queja_canal">
+            <EntityTypeMapping TypeName="Model_general.tbl_queja_canal">
+              <MappingFragment StoreEntitySet="tbl_queja_canal">
+                <ScalarProperty Name="IdQueja_canal" ColumnName="IdQueja_canal" />
+                <ScalarProperty Name="qc_descripcion" ColumnName="qc_descripcion" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_queja_origen">
+            <EntityTypeMapping TypeName="Model_general.tbl_queja_origen">
+              <MappingFragment StoreEntitySet="tbl_queja_origen">
+                <ScalarProperty Name="IdQueja_origen" ColumnName="IdQueja_origen" />
+                <ScalarProperty Name="qo_descripcion" ColumnName="qo_descripcion" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_queja_tipo">
+            <EntityTypeMapping TypeName="Model_general.tbl_queja_tipo">
+              <MappingFragment StoreEntitySet="tbl_queja_tipo">
+                <ScalarProperty Name="IdQueja_tipo" ColumnName="IdQueja_tipo" />
+                <ScalarProperty Name="qt_descripcion" ColumnName="qt_descripcion" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_queja_tipo_motivo">
+            <EntityTypeMapping TypeName="Model_general.tbl_queja_tipo_motivo">
+              <MappingFragment StoreEntitySet="tbl_queja_tipo_motivo">
+                <ScalarProperty Name="IdQueja_motivo" ColumnName="IdQueja_motivo" />
+                <ScalarProperty Name="IdQueja_tipo" ColumnName="IdQueja_tipo" />
+                <ScalarProperty Name="qm_descripcion" ColumnName="qm_descripcion" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_sucursal">
+            <EntityTypeMapping TypeName="Model_general.tbl_sucursal">
+              <MappingFragment StoreEntitySet="tbl_sucursal">
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="su_codigo" ColumnName="su_codigo" />
+                <ScalarProperty Name="su_descripcion" ColumnName="su_descripcion" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_usuario">
+            <EntityTypeMapping TypeName="Model_general.tbl_usuario">
+              <MappingFragment StoreEntitySet="tbl_usuario">
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="us_contrasenia" ColumnName="us_contrasenia" />
+                <ScalarProperty Name="us_nombre" ColumnName="us_nombre" />
+                <ScalarProperty Name="us_estado" ColumnName="us_estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_queja_estado">
+            <EntityTypeMapping TypeName="Model_general.tbl_queja_estado">
+              <MappingFragment StoreEntitySet="tbl_queja_estado">
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="qe_se_modifica" ColumnName="qe_se_modifica" />
+                <ScalarProperty Name="qe_descripcion" ColumnName="qe_descripcion" />
+                <ScalarProperty Name="IdQueja_estado" ColumnName="IdQueja_estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_reporte_no_conformidad_det">
+            <EntityTypeMapping TypeName="Model_general.tbl_reporte_no_conformidad_det">
+              <MappingFragment StoreEntitySet="tbl_reporte_no_conformidad_det">
+                <ScalarProperty Name="nd_responsable" ColumnName="nd_responsable" />
+                <ScalarProperty Name="nd_plazo" ColumnName="nd_plazo" />
+                <ScalarProperty Name="nd_actividad" ColumnName="nd_actividad" />
+                <ScalarProperty Name="secuencia" ColumnName="secuencia" />
+                <ScalarProperty Name="IdNoConformidad" ColumnName="IdNoConformidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_reporte_no_conformidad_tipo">
+            <EntityTypeMapping TypeName="Model_general.tbl_reporte_no_conformidad_tipo">
+              <MappingFragment StoreEntitySet="tbl_reporte_no_conformidad_tipo">
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="nt_descripcion" ColumnName="nt_descripcion" />
+                <ScalarProperty Name="IdNoConformidad_tipo" ColumnName="IdNoConformidad_tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_reporte_no_conformidad">
+            <EntityTypeMapping TypeName="Model_general.tbl_reporte_no_conformidad">
+              <MappingFragment StoreEntitySet="tbl_reporte_no_conformidad">
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="nc_fecha_verificacion" ColumnName="nc_fecha_verificacion" />
+                <ScalarProperty Name="nc_verificacion" ColumnName="nc_verificacion" />
+                <ScalarProperty Name="nc_cumplimiento" ColumnName="nc_cumplimiento" />
+                <ScalarProperty Name="nc_causa" ColumnName="nc_causa" />
+                <ScalarProperty Name="nc_descripcion" ColumnName="nc_descripcion" />
+                <ScalarProperty Name="nc_fecha" ColumnName="nc_fecha" />
+                <ScalarProperty Name="IdQueja" ColumnName="IdQueja" />
+                <ScalarProperty Name="IdNoConformidad_tipo" ColumnName="IdNoConformidad_tipo" />
+                <ScalarProperty Name="IdNoConformidad" ColumnName="IdNoConformidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_mes">
+            <EntityTypeMapping TypeName="Model_general.tbl_mes">
+              <MappingFragment StoreEntitySet="tbl_mes">
+                <ScalarProperty Name="me_codigo" ColumnName="me_codigo" />
+                <ScalarProperty Name="me_descripcion" ColumnName="me_descripcion" />
+                <ScalarProperty Name="IdMes" ColumnName="IdMes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_queja">
+            <EntityTypeMapping TypeName="Model_general.tbl_queja">
+              <MappingFragment StoreEntitySet="tbl_queja">
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="cl_correo" ColumnName="cl_correo" />
+                <ScalarProperty Name="cl_telefono" ColumnName="cl_telefono" />
+                <ScalarProperty Name="cl_nombre" ColumnName="cl_nombre" />
+                <ScalarProperty Name="qu_anio" ColumnName="qu_anio" />
+                <ScalarProperty Name="IdMes" ColumnName="IdMes" />
+                <ScalarProperty Name="qu_fecha" ColumnName="qu_fecha" />
+                <ScalarProperty Name="qu_solucion" ColumnName="qu_solucion" />
+                <ScalarProperty Name="qu_detalle" ColumnName="qu_detalle" />
+                <ScalarProperty Name="IdQueja_estado" ColumnName="IdQueja_estado" />
+                <ScalarProperty Name="IdQueja_motivo" ColumnName="IdQueja_motivo" />
+                <ScalarProperty Name="IdQueja_tipo" ColumnName="IdQueja_tipo" />
+                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdQueja_origen" ColumnName="IdQueja_origen" />
+                <ScalarProperty Name="IdQueja_canal" ColumnName="IdQueja_canal" />
+                <ScalarProperty Name="IdQueja" ColumnName="IdQueja" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_parametros_correo">
+            <EntityTypeMapping TypeName="Model_general.tbl_parametros_correo">
+              <MappingFragment StoreEntitySet="tbl_parametros_correo">
+                <ScalarProperty Name="ftp_url" ColumnName="ftp_url" />
+                <ScalarProperty Name="ftp_contrasenia" ColumnName="ftp_contrasenia" />
+                <ScalarProperty Name="ftp_usuario" ColumnName="ftp_usuario" />
+                <ScalarProperty Name="enviar_correo_al_guardar_queja" ColumnName="enviar_correo_al_guardar_queja" />
+                <ScalarProperty Name="permitir_ssl" ColumnName="permitir_ssl" />
+                <ScalarProperty Name="host" ColumnName="host" />
+                <ScalarProperty Name="puerto" ColumnName="puerto" />
+                <ScalarProperty Name="correo_asunto" ColumnName="correo_asunto" />
+                <ScalarProperty Name="correo_contrasenia" ColumnName="correo_contrasenia" />
+                <ScalarProperty Name="correo_cuenta_destinatario" ColumnName="correo_cuenta_destinatario" />
+                <ScalarProperty Name="correo_cuenta" ColumnName="correo_cuenta" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
