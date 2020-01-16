@@ -3,8 +3,8 @@
 @{
     var grid = Html.DevExpress().GridView(settings =>
     {
-        settings.Name = "GridView_reclamos";
-        settings.CallbackRouteValues = new { Controller = "Reclamo", Action = "GridViewPartial_reclamos", fecha_ini = Model.fecha_ini, fecha_fin = Model.fecha_fin, IdDepartamento = Model.IdDepartamento, IdQueja_estado=Model.IdQueja_estado };
+        settings.Name = "GridView_reclamos_resumen";
+        settings.CallbackRouteValues = new { Controller = "ReclamoResumen", Action = "GridViewPartial_reclamos_resumen", fecha_ini = Model.fecha_ini, fecha_fin = Model.fecha_fin, IdDepartamento = Model.IdDepartamento, IdQueja_estado=Model.IdQueja_estado };
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdQueja";
 
@@ -17,6 +17,10 @@
         settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
         settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
         settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 500;
+
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.Control;
 
         //Configuración scrolling y pager
         settings.Settings.HorizontalScrollBarMode = ScrollBarMode.Visible;
@@ -89,20 +93,20 @@
         settings.Columns.Add("info_estado.qe_se_modifica").Visible = false;
         settings.Columns.Add("IdUsuario","Usuario").Width = Unit.Pixel(100);
         settings.Columns.Add("IdUsuarioCierre", "Usuario Cierre").Width = Unit.Pixel(100);
-        
+
         settings.Columns.Add(column =>
-{
-    column.Caption = "";
-    column.SetDataItemTemplateContent(container =>
-    {
-        Html.DevExpress().HyperLink(hyperlink =>
         {
-            var keyValue = DataBinder.Eval(container.DataItem, "IdQueja");
-            hyperlink.Properties.Text = "Ver adjuntos";
-            hyperlink.NavigateUrl = Url.Action("Adjuntos", "Reclamo", new { IdQueja = keyValue });
-        }).Render();
-    });
-});
+            column.Caption = "";
+            column.SetDataItemTemplateContent(container =>
+            {
+                Html.DevExpress().HyperLink(hyperlink =>
+                {
+                    var keyValue = DataBinder.Eval(container.DataItem, "IdQueja");
+                    hyperlink.Properties.Text = "Ver adjuntos";
+                    hyperlink.NavigateUrl = Url.Action("Adjuntos", "Reclamo", new { IdQueja = keyValue });
+                }).Render();
+            });
+        });
         settings.Columns.Add(column =>
         {
             column.Caption = "";

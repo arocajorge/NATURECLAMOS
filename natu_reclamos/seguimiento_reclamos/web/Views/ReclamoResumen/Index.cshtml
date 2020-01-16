@@ -11,7 +11,7 @@
     }
 </script>
 
-@using (Html.BeginForm("Index", "Reclamo", FormMethod.Post))
+@using (Html.BeginForm("Index", "ReclamoResumen", FormMethod.Post))
 {
     @Html.DevExpress().FormLayout(settings =>
 {
@@ -99,5 +99,5 @@
     });
 
 }).GetHtml();
-    @Html.Action("GridViewPartial_reclamos",Model)
+    @Html.Action("GridViewPartial_reclamos_resumen",Model)
 }

@@ -20,7 +20,8 @@
         <AssociationConnector Association="Model_general.FK_tbl_reporte_no_conformidad_det_tbl_reporte_no_conformidad" />
         <AssociationConnector Association="Model_general.FK_tbl_reporte_no_conformidad_tbl_reporte_no_conformidad_tipo" />
         <EntityTypeShape EntityType="Model_general.tbl_mes" Width="1.5" PointX="3" PointY="23.5" />
-        <EntityTypeShape EntityType="Model_general.tbl_queja" Width="1.5" PointX="5.25" PointY="8.25" />
+        <EntityTypeShape EntityType="Model_general.tbl_parametros_correo" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Model_general.tbl_queja" Width="1.5" PointX="5.25" PointY="10" />
         <AssociationConnector Association="Model_general.FK_tbl_queja_tbl_departamento" />
         <AssociationConnector Association="Model_general.FK_tbl_queja_tbl_mes" />
         <AssociationConnector Association="Model_general.FK_tbl_queja_tbl_queja_canal" />
@@ -31,7 +32,6 @@
         <AssociationConnector Association="Model_general.FK_tbl_queja_tbl_sucursal" />
         <AssociationConnector Association="Model_general.FK_tbl_queja_tbl_usuario" />
         <AssociationConnector Association="Model_general.FK_tbl_reporte_no_conformidad_tbl_queja" />
-        <EntityTypeShape EntityType="Model_general.tbl_parametros_correo" Width="1.5" PointX="5.375" PointY="0.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

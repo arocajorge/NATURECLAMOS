@@ -1,22 +1,17 @@
-﻿using DevExpress.Web.Mvc;
+﻿using data.general;
+using DevExpress.Web.Mvc;
+using info.general;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
-using info.general;
-using data.general;
-using web.Filters;
-using System.Net.Mail;
-using System.Net;
-using DevExpress.Web;
 
 namespace web.Controllers
 {
-    [Authorize]
-    [WebSecurityAuthorize]
-    
-    public class ReclamoController : Controller
+    public class ReclamoResumenController : Controller
     {
         tbl_queja_Data odata = new tbl_queja_Data();
         tbl_parametros_correo_Data odata_param = new tbl_parametros_correo_Data();
@@ -42,7 +37,7 @@ namespace web.Controllers
             model.p_fecha_fin.Value = fecha_fin;
             model.p_IdDepartamento.Value = IdDepartamento;
             model.p_IdQueja_estado.Value = IdQueja_estado;
-            
+
             return View("Imprimir", model);
         }
         private bool validar(tbl_queja_Info i_validar, ref string msg)
@@ -92,7 +87,6 @@ namespace web.Controllers
                 i_validar.qu_anio = i_validar.qu_fecha.Year;
                 i_validar.IdMes = i_validar.qu_fecha.Month;
                 i_validar.IdUsuario = User.Identity.Name == null ? "admin" : User.Identity.Name;
-
                 return true;
             }
             catch (Exception)
@@ -180,10 +174,10 @@ namespace web.Controllers
         {
             if (e.UploadedFile.IsValid)
             {
-               //Por ahora no se como funciona esto
+                //Por ahora no se como funciona esto
             }
         }
-        
+
         #endregion
 
         private void enviar_correo(decimal IdQueja)
@@ -198,9 +192,9 @@ namespace web.Controllers
 
             foreach (var item in correos)
             {
-                if(!string.IsNullOrEmpty(item.Trim()))
+                if (!string.IsNullOrEmpty(item.Trim()))
                     mail.To.Add(item.Trim());
-            }            
+            }
             mail.From = new MailAddress(info_param.correo_cuenta);
             mail.Subject = info_param.correo_asunto;
 
@@ -210,18 +204,18 @@ namespace web.Controllers
             {
                 Body += "<p> Se ha creado una nueva mejora desde la aplicación <strong>Seguimiento de mejoras Naturissimo</strong></p><br>";
 
-                Body += "<strong># de Mejora: </strong>"+info_queja.IdQueja.ToString()+"<br>";
-                Body += "<strong> Fecha: </strong>"+ info_queja .qu_fecha+ "<br>";
-                Body += "<strong> Estado: </strong>"+ info_queja.info_estado.qe_descripcion + "<br>";
-                Body += "<strong> Sucursal: </strong>"+ info_queja.info_sucursal.su_descripcion+ "<br>";
-                Body += "<strong> Origen: </strong>"+info_queja.info_origen.qo_descripcion+"<br>";
-                Body += "<strong> Canal: </strong>"+info_queja.info_canal.qc_descripcion+"<br>";
-                Body += "<strong> Departamento: </strong>"+info_queja.info_departamento.de_descripcion+"<br>";
-                Body += "<strong> Tipo: </strong>"+info_queja.info_tipo.qt_descripcion+"<br>";
-                Body += "<strong> Motivo: </strong>"+info_queja.info_motivo.qm_descripcion+"<br>";
-                Body += "<strong> Detalle: </strong>"+info_queja.qu_detalle+"<br>";
-                Body += "<strong> Solución: </strong>"+info_queja.qu_solucion+"<br>";
-                Body += "<strong> Usuario: </strong>"+info_queja.IdUsuario+"<br>";
+                Body += "<strong># de Mejora: </strong>" + info_queja.IdQueja.ToString() + "<br>";
+                Body += "<strong> Fecha: </strong>" + info_queja.qu_fecha + "<br>";
+                Body += "<strong> Estado: </strong>" + info_queja.info_estado.qe_descripcion + "<br>";
+                Body += "<strong> Sucursal: </strong>" + info_queja.info_sucursal.su_descripcion + "<br>";
+                Body += "<strong> Origen: </strong>" + info_queja.info_origen.qo_descripcion + "<br>";
+                Body += "<strong> Canal: </strong>" + info_queja.info_canal.qc_descripcion + "<br>";
+                Body += "<strong> Departamento: </strong>" + info_queja.info_departamento.de_descripcion + "<br>";
+                Body += "<strong> Tipo: </strong>" + info_queja.info_tipo.qt_descripcion + "<br>";
+                Body += "<strong> Motivo: </strong>" + info_queja.info_motivo.qm_descripcion + "<br>";
+                Body += "<strong> Detalle: </strong>" + info_queja.qu_detalle + "<br>";
+                Body += "<strong> Solución: </strong>" + info_queja.qu_solucion + "<br>";
+                Body += "<strong> Usuario: </strong>" + info_queja.IdUsuario + "<br>";
                 Body += "<strong> Nombre cliente: </strong>" + info_queja.cl_nombre + "<br>";
                 Body += "<strong> Correo cliente: </strong>" + info_queja.cl_correo + "<br>";
                 Body += "<strong> Teléfono cliente: </strong>" + info_queja.cl_telefono + "<br>";
@@ -274,7 +268,7 @@ namespace web.Controllers
                     return View(model);
                 }
 
-                if (model.IdQueja_estado==2)
+                if (model.IdQueja_estado == 2)
                 {
                     model.IdUsuarioCierre = User.Identity.Name == null ? null : User.Identity.Name;
                 }
@@ -301,7 +295,7 @@ namespace web.Controllers
             }
         }
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_reclamos(DateTime? fecha_ini, DateTime? fecha_fin, int IdDepartamento=0, int IdQueja_estado=0)
+        public ActionResult GridViewPartial_reclamos_resumen(DateTime? fecha_ini, DateTime? fecha_fin, int IdDepartamento = 0, int IdQueja_estado = 0)
         {
             ViewBag.lst_queja = odata.get_list(fecha_ini, fecha_fin, IdDepartamento, IdQueja_estado);
             tbl_queja_Info model = new tbl_queja_Info
@@ -309,7 +303,7 @@ namespace web.Controllers
                 fecha_ini = fecha_ini,
                 fecha_fin = fecha_fin
             };
-            return PartialView("_GridViewPartial_reclamos",model);
+            return PartialView("_GridViewPartial_reclamos_resumen", model);
         }
 
         public ActionResult Anular(decimal? IdQueja)
@@ -347,7 +341,7 @@ namespace web.Controllers
 
                 throw;
             }
-        }        
+        }
 
         public ActionResult ComboBoxPartial_motivo_x_tipo(int? IdQueja_tipo)
         {
@@ -372,15 +366,7 @@ namespace web.Controllers
             tbl_queja_Info model = new tbl_queja_Info();
             model.lst_imagenes = FilesHelper.get_list_directory(IdQueja);
 
-            return View("_Adjuntos",model);
-        }        
-    }
-
-    public class HomeControllerControllerUploadControlSettings
-    {
-        public static DevExpress.Web.UploadControlValidationSettings UploadControlValidationSettings = new DevExpress.Web.UploadControlValidationSettings()
-        {
-            MaxFileSize = 4194304
-        };
+            return View("_Adjuntos", model);
+        }
     }
 }

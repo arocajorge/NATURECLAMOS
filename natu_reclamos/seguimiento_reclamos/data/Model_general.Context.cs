@@ -37,7 +37,7 @@ namespace data
         public virtual DbSet<tbl_reporte_no_conformidad_tipo> tbl_reporte_no_conformidad_tipo { get; set; }
         public virtual DbSet<tbl_reporte_no_conformidad> tbl_reporte_no_conformidad { get; set; }
         public virtual DbSet<tbl_mes> tbl_mes { get; set; }
-        public virtual DbSet<tbl_queja> tbl_queja { get; set; }
         public virtual DbSet<tbl_parametros_correo> tbl_parametros_correo { get; set; }
+        public virtual DbSet<tbl_queja> tbl_queja { get; set; }
     }
 }

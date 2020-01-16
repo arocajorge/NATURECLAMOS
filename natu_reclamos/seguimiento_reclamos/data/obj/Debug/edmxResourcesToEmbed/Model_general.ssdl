@@ -48,12 +48,14 @@
     <Property Name="qu_detalle" Type="varchar(max)" />
     <Property Name="qu_solucion" Type="varchar(max)" />
     <Property Name="qu_fecha" Type="datetime" Nullable="false" />
+    <Property Name="qu_fecha_evento" Type="datetime" />
     <Property Name="IdMes" Type="int" Nullable="false" />
     <Property Name="qu_anio" Type="int" Nullable="false" />
     <Property Name="cl_nombre" Type="varchar" MaxLength="500" />
     <Property Name="cl_telefono" Type="varchar" MaxLength="200" />
     <Property Name="cl_correo" Type="varchar" MaxLength="500" />
     <Property Name="IdUsuario" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="IdUsuarioCierre" Type="varchar" MaxLength="50" />
     <Property Name="estado" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="tbl_queja_canal">

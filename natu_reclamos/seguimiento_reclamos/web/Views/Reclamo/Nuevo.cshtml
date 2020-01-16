@@ -32,11 +32,21 @@
                s.Properties.DisplayFormatString = "dd/MM/yyyy";
            });
        });
+       groupItem.Items.Add(m => m.qu_fecha_evento, i =>
+       {
+           i.NestedExtension().DateEdit(s =>
+           {
+               s.Width = Unit.Pixel(100);
+               s.Properties.EditFormat = EditFormat.DateTime;
+               s.Properties.DisplayFormatString = "dd/MM/yyyy";
+           });
+       });
        groupItem.Items.Add(m => m.IdQueja_estado, i =>
        {
            i.NestedExtension().ComboBox(s =>
            {
                s.Width = Unit.Percentage(100);
+               s.ReadOnly = true;
                s.Properties.DataSource = ViewBag.lst_estado;
                s.Properties.TextField = "qe_descripcion";
                s.Properties.ValueField = "IdQueja_estado";
