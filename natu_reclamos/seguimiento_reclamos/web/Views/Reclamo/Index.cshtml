@@ -27,7 +27,7 @@
         group.Name = "Filtros";
         group.Caption = "Filtros";
 
-        group.Items.Add(m => m.IdDepartamento, i =>
+        group.Items.Add(m => m.IdDepartamentoFiltro, i =>
         {
             i.NestedExtension().ComboBox(c =>
             {
@@ -40,7 +40,7 @@
             });
         });
 
-        group.Items.Add(m => m.IdQueja_estado, i =>
+        group.Items.Add(m => m.IdQueja_estadoFiltro, i =>
         {
             i.NestedExtension().ComboBox(c =>
             {

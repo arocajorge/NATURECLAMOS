@@ -22,9 +22,15 @@ namespace web.Controllers
         tbl_parametros_correo_Data odata_param = new tbl_parametros_correo_Data();
         tbl_parametros_correo_Info info_param = new tbl_parametros_correo_Info();
         string mensaje = "";
-        public ActionResult Index()
+        public ActionResult Index(DateTime? FechaIni, DateTime? FechaFin, int? IdQueja_estadoFiltro, int? IdDepartamentoFiltro)
         {
-            tbl_queja_Info options = new tbl_queja_Info();
+            tbl_queja_Info options = new tbl_queja_Info
+            {
+                fecha_ini = FechaIni,
+                fecha_fin = FechaFin,
+                IdQueja_estadoFiltro = IdQueja_estadoFiltro,
+                IdDepartamentoFiltro = IdDepartamentoFiltro
+            };
             cargar_combos();
             return View(options);
         }
@@ -101,7 +107,7 @@ namespace web.Controllers
                 throw;
             }
         }
-        public ActionResult Nuevo()
+        public ActionResult Nuevo(DateTime? FechaIni, DateTime? FechaFin, int? IdQueja_estadoFiltro, int? IdDepartamentoFiltro)
         {
             tbl_queja_Info model = new tbl_queja_Info
             {
@@ -109,6 +115,13 @@ namespace web.Controllers
                 qu_fecha_evento = DateTime.Now.Date,
                 IdQueja_estado = 1
             };
+            if (FechaIni != null && FechaFin != null)
+            {
+                model.fecha_ini = FechaIni;
+                model.fecha_fin = FechaFin;
+                model.IdQueja_estadoFiltro = IdQueja_estadoFiltro;
+                model.IdDepartamentoFiltro = IdDepartamentoFiltro;
+            }
             cargar_combos();
             return View(model);
         }
@@ -243,7 +256,7 @@ namespace web.Controllers
             #endregion
         }
 
-        public ActionResult Modificar(decimal? IdQueja)
+        public ActionResult Modificar(decimal? IdQueja, DateTime? FechaIni, DateTime? FechaFin, int? IdQueja_estadoFiltro, int? IdDepartamentoFiltro)
         {
             try
             {
@@ -253,6 +266,13 @@ namespace web.Controllers
                 if (model == null)
                     return RedirectToAction("Index", "Reclamo");
                 cargar_combos();
+                if (FechaIni != null && FechaFin != null)
+                {
+                    model.fecha_ini = FechaIni;
+                    model.fecha_fin = FechaFin;
+                    model.IdQueja_estadoFiltro = IdQueja_estadoFiltro;
+                    model.IdDepartamentoFiltro = IdDepartamentoFiltro;
+                }
                 return View(model);
             }
             catch (Exception)
@@ -272,11 +292,6 @@ namespace web.Controllers
                     ViewBag.mensaje = mensaje;
                     cargar_combos();
                     return View(model);
-                }
-
-                if (model.IdQueja_estado==2)
-                {
-                    model.IdUsuarioCierre = User.Identity.Name == null ? null : User.Identity.Name;
                 }
 
                 if (!odata.modificarDB(model))
@@ -312,7 +327,7 @@ namespace web.Controllers
             return PartialView("_GridViewPartial_reclamos",model);
         }
 
-        public ActionResult Anular(decimal? IdQueja)
+        public ActionResult Anular(decimal? IdQueja, DateTime? FechaIni, DateTime? FechaFin, int? IdQueja_estadoFiltro, int? IdDepartamentoFiltro)
         {
             try
             {
@@ -322,6 +337,13 @@ namespace web.Controllers
                 if (model == null)
                     return RedirectToAction("Index", "Reclamo");
                 cargar_combos();
+                if (FechaIni != null && FechaFin != null)
+                {
+                    model.fecha_ini = FechaIni;
+                    model.fecha_fin = FechaFin;
+                    model.IdQueja_estadoFiltro = IdQueja_estadoFiltro;
+                    model.IdDepartamentoFiltro = IdDepartamentoFiltro;
+                }
                 return View(model);
             }
             catch (Exception)
