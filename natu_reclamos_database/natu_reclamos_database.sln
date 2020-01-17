@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "natu_reclamos_database", "natu_reclamos_database\natu_reclamos_database.sqlproj", "{072F083E-2E4F-470D-BA1C-5B8371622445}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{072F083E-2E4F-470D-BA1C-5B8371622445}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{072F083E-2E4F-470D-BA1C-5B8371622445}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{072F083E-2E4F-470D-BA1C-5B8371622445}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{072F083E-2E4F-470D-BA1C-5B8371622445}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{072F083E-2E4F-470D-BA1C-5B8371622445}.Release|Any CPU.Build.0 = Release|Any CPU
+		{072F083E-2E4F-470D-BA1C-5B8371622445}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
