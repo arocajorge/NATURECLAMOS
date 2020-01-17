@@ -23,7 +23,7 @@ namespace web.Controllers
             {
                 fecha_ini = FechaIni,
                 fecha_fin = FechaFin,
-                IdQueja_estadoFiltro = IdQueja_estadoFiltro,
+                IdQueja_estadoFiltro = IdQueja_estadoFiltro ?? 1,
                 IdDepartamentoFiltro = IdDepartamentoFiltro
             };
             cargar_combos();
@@ -174,7 +174,7 @@ namespace web.Controllers
                 if (info_param != null && info_param.enviar_correo_al_guardar_queja == true)
                     enviar_correo(model.IdQueja);
 
-                return RedirectToAction("Index", "Reclamo");
+                return RedirectToAction("Index", "ReclamoResumen", new { fecha_ini = model.fecha_ini, fecha_fin = model.fecha_fin, IdDepartamento = model.IdDepartamentoFiltro, IdQueja_estado = model.IdQueja_estadoFiltro });
             }
             catch (Exception)
             {
@@ -255,10 +255,10 @@ namespace web.Controllers
             try
             {
                 if (IdQueja == null)
-                    return RedirectToAction("Index", "Reclamo");
+                    return RedirectToAction("Index", "ReclamoResumen", new { fecha_ini = FechaIni, fecha_fin = FechaFin, IdDepartamento = IdDepartamentoFiltro, IdQueja_estado = IdQueja_estadoFiltro });
                 tbl_queja_Info model = odata.get_info(Convert.ToInt32(IdQueja));
                 if (model == null)
-                    return RedirectToAction("Index", "Reclamo");
+                    return RedirectToAction("Index", "ReclamoResumen", new { fecha_ini = FechaIni, fecha_fin = FechaFin, IdDepartamento = IdDepartamentoFiltro, IdQueja_estado = IdQueja_estadoFiltro });
                 cargar_combos();
                 if (FechaIni != null && FechaFin != null)
                 {
@@ -306,7 +306,7 @@ namespace web.Controllers
                         FilesHelper.FtpUploadFile(item, item.FileName, model.IdQueja.ToString());
                 }
 
-                return RedirectToAction("Index", "Reclamo");
+                return RedirectToAction("Index", "ReclamoResumen", new { fecha_ini = model.fecha_ini, fecha_fin = model.fecha_fin, IdDepartamento = model.IdDepartamentoFiltro, IdQueja_estado = model.IdQueja_estadoFiltro });
             }
             catch (Exception)
             {
@@ -321,7 +321,9 @@ namespace web.Controllers
             tbl_queja_Info model = new tbl_queja_Info
             {
                 fecha_ini = fecha_ini,
-                fecha_fin = fecha_fin
+                fecha_fin = fecha_fin,
+                IdDepartamentoFiltro = IdDepartamento,
+                IdQueja_estadoFiltro = IdQueja_estado
             };
             return PartialView("_GridViewPartial_reclamos_resumen", model);
         }
@@ -331,10 +333,10 @@ namespace web.Controllers
             try
             {
                 if (IdQueja == null)
-                    return RedirectToAction("Index", "Reclamo");
+                    return RedirectToAction("Index", "ReclamoResumen", new { fecha_ini = FechaIni, fecha_fin = FechaFin, IdDepartamento = IdDepartamentoFiltro, IdQueja_estado = IdQueja_estadoFiltro });
                 tbl_queja_Info model = odata.get_info(Convert.ToInt32(IdQueja));
                 if (model == null)
-                    return RedirectToAction("Index", "Reclamo");
+                    return RedirectToAction("Index", "ReclamoResumen", new { fecha_ini = FechaIni, fecha_fin = FechaFin, IdDepartamento = IdDepartamentoFiltro, IdQueja_estado = IdQueja_estadoFiltro });
                 cargar_combos();
                 if (FechaIni != null && FechaFin != null)
                 {
@@ -361,7 +363,7 @@ namespace web.Controllers
                     cargar_combos();
                     return View(model);
                 }
-                return RedirectToAction("Index", "Reclamo");
+                return RedirectToAction("Index", "ReclamoResumen", new { fecha_ini = model.fecha_ini, fecha_fin = model.fecha_fin, IdDepartamento = model.IdDepartamentoFiltro, IdQueja_estado = model.IdQueja_estadoFiltro });
             }
             catch (Exception)
             {

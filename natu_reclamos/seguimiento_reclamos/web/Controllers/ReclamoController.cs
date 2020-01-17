@@ -28,7 +28,7 @@ namespace web.Controllers
             {
                 fecha_ini = FechaIni,
                 fecha_fin = FechaFin,
-                IdQueja_estadoFiltro = IdQueja_estadoFiltro,
+                IdQueja_estadoFiltro = IdQueja_estadoFiltro ?? 1,
                 IdDepartamentoFiltro = IdDepartamentoFiltro
             };
             cargar_combos();
@@ -180,7 +180,7 @@ namespace web.Controllers
                 if (info_param != null && info_param.enviar_correo_al_guardar_queja == true)
                     enviar_correo(model.IdQueja);
 
-                return RedirectToAction("Index", "Reclamo");
+                return RedirectToAction("Index", "Reclamo", new { fecha_ini = model.fecha_ini, fecha_fin = model.fecha_fin, IdDepartamento = model.IdDepartamentoFiltro, IdQueja_estado = model.IdQueja_estadoFiltro });
             }
             catch (Exception)
             {
@@ -261,10 +261,10 @@ namespace web.Controllers
             try
             {
                 if (IdQueja == null)
-                    return RedirectToAction("Index", "Reclamo");
+                    return RedirectToAction("Index", "Reclamo", new { fecha_ini = FechaIni, fecha_fin = FechaFin, IdDepartamento = IdDepartamentoFiltro, IdQueja_estado = IdQueja_estadoFiltro });
                 tbl_queja_Info model = odata.get_info(Convert.ToInt32(IdQueja));
                 if (model == null)
-                    return RedirectToAction("Index", "Reclamo");
+                    return RedirectToAction("Index", "Reclamo", new { fecha_ini = FechaIni, fecha_fin = FechaFin, IdDepartamento = IdDepartamentoFiltro, IdQueja_estado = IdQueja_estadoFiltro });
                 cargar_combos();
                 if (FechaIni != null && FechaFin != null)
                 {
@@ -307,7 +307,7 @@ namespace web.Controllers
                         FilesHelper.FtpUploadFile(item, item.FileName, model.IdQueja.ToString());
                 }
 
-                return RedirectToAction("Index", "Reclamo");
+                return RedirectToAction("Index", "Reclamo", new { fecha_ini = model.fecha_ini, fecha_fin = model.fecha_fin, IdDepartamento = model.IdDepartamentoFiltro, IdQueja_estado = model.IdQueja_estadoFiltro });
             }
             catch (Exception)
             {
@@ -316,13 +316,15 @@ namespace web.Controllers
             }
         }
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_reclamos(DateTime? fecha_ini, DateTime? fecha_fin, int IdDepartamento=0, int IdQueja_estado=0)
+        public ActionResult GridViewPartial_reclamos(DateTime? fecha_ini, DateTime? fecha_fin, int? IdDepartamento, int? IdQueja_estado=0)
         {
-            ViewBag.lst_queja = odata.get_list(fecha_ini, fecha_fin, IdDepartamento, IdQueja_estado);
+            ViewBag.lst_queja = odata.get_list(fecha_ini, fecha_fin, IdDepartamento ?? 0, IdQueja_estado ?? 0);
             tbl_queja_Info model = new tbl_queja_Info
             {
                 fecha_ini = fecha_ini,
-                fecha_fin = fecha_fin
+                fecha_fin = fecha_fin,
+                IdDepartamentoFiltro = IdDepartamento,
+                IdQueja_estadoFiltro = IdQueja_estado
             };
             return PartialView("_GridViewPartial_reclamos",model);
         }
@@ -332,10 +334,10 @@ namespace web.Controllers
             try
             {
                 if (IdQueja == null)
-                    return RedirectToAction("Index", "Reclamo");
+                    return RedirectToAction("Index", "Reclamo", new { fecha_ini = FechaIni, fecha_fin = FechaFin, IdDepartamento = IdDepartamentoFiltro, IdQueja_estado = IdQueja_estadoFiltro });
                 tbl_queja_Info model = odata.get_info(Convert.ToInt32(IdQueja));
                 if (model == null)
-                    return RedirectToAction("Index", "Reclamo");
+                    return RedirectToAction("Index", "Reclamo", new { fecha_ini = FechaIni, fecha_fin = FechaFin, IdDepartamento = IdDepartamentoFiltro, IdQueja_estado = IdQueja_estadoFiltro });
                 cargar_combos();
                 if (FechaIni != null && FechaFin != null)
                 {
@@ -362,7 +364,7 @@ namespace web.Controllers
                     cargar_combos();
                     return View(model);
                 }
-                return RedirectToAction("Index", "Reclamo");
+                return RedirectToAction("Index", "Reclamo", new { fecha_ini = model.fecha_ini, fecha_fin = model.fecha_fin, IdDepartamento = model.IdDepartamentoFiltro, IdQueja_estado = model.IdQueja_estadoFiltro });
             }
             catch (Exception)
             {

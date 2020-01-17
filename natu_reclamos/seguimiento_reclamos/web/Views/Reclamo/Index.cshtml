@@ -99,5 +99,5 @@
     });
 
 }).GetHtml();
-    @Html.Action("GridViewPartial_reclamos",Model)
+    @Html.Action("GridViewPartial_reclamos", new { fecha_ini = Model.fecha_ini, fecha_fin = Model.fecha_fin, IdDepartamento = Model.IdDepartamentoFiltro, IdQueja_estado = Model.IdQueja_estadoFiltro })
 }
