@@ -23,6 +23,7 @@ namespace data
         public string IdUsuario { get; set; }
         public string us_contrasenia { get; set; }
         public string us_nombre { get; set; }
+        public string us_tipo { get; set; }
         public bool us_estado { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

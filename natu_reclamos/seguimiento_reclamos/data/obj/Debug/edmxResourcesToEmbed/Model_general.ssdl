@@ -151,6 +151,7 @@
     <Property Name="IdUsuario" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="us_contrasenia" Type="varchar" MaxLength="200" Nullable="false" />
     <Property Name="us_nombre" Type="varchar" MaxLength="500" />
+    <Property Name="us_tipo" Type="varchar" MaxLength="50" />
     <Property Name="us_estado" Type="bit" Nullable="false" />
   </EntityType>
   <Association Name="FK_tbl_queja_tbl_departamento">

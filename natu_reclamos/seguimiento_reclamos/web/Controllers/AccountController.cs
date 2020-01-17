@@ -37,7 +37,7 @@ namespace web.Controllers {
                     else
                     {
                         FormsAuthentication.SetAuthCookie(info.IdUsuario, true);
-                        
+                        Session["TipoUsuario"] = info.us_tipo;
                         return RedirectToAction("Nuevo", "Reclamo");
                     }
                 }
@@ -58,7 +58,15 @@ namespace web.Controllers {
         
         public ActionResult Index()
         {
-            return View();
+            tbl_usuario_info options = new tbl_usuario_info();
+            cargar_combos();
+            return View(options);
+        }
+        [HttpPost]
+        public ActionResult Index(tbl_usuario_info options)
+        {
+            cargar_combos();
+            return View(options);
         }
 
         #region Status Codes
@@ -99,11 +107,30 @@ namespace web.Controllers {
         }
         #endregion
 
+        #region Metodos
+        private void cargar_combos()
+        {
+            try
+            {
+                Dictionary<string, string> lst_tipo = new Dictionary<string, string>();
+                lst_tipo.Add("ADMINISTRADOR", "ADMINISTRADOR");
+                lst_tipo.Add("USUARIO", "USUARIO");
+                ViewBag.lst_tipo = lst_tipo;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
         public ActionResult Nuevo()
         {
             try
             {
                 tbl_usuario_info model = new tbl_usuario_info();
+                cargar_combos();
                 return View(model);
             }
             catch (Exception)
@@ -128,6 +155,7 @@ namespace web.Controllers {
                 if (!odata.guardarDB(model,ref mensaje))
                 {
                     ViewBag.mensaje = mensaje;
+                    cargar_combos();
                     return View();
                 }
                 return RedirectToAction("Index", "Account");
@@ -148,6 +176,7 @@ namespace web.Controllers {
                 tbl_usuario_info model = odata.get_info(IdUsuario);
                 if (model == null)
                     return RedirectToAction("Index", "Account");
+                cargar_combos();
                 return View(model);
             }
             catch (Exception)
@@ -166,11 +195,13 @@ namespace web.Controllers {
                 if (!validar(model, ref mensaje))
                 {
                     ViewBag.mensaje = mensaje;
+                    cargar_combos();
                     return View();
                 }
                 if (!odata.modificarDB(model))
                 {
                     ViewBag.mensaje = "No se pudo modificar el registro";
+                    cargar_combos();
                     return View();
                 }
                 return RedirectToAction("Index", "Account");
@@ -191,6 +222,7 @@ namespace web.Controllers {
                 tbl_usuario_info model = odata.get_info(IdUsuario);
                 if (model == null)
                     return RedirectToAction("Index", "Account");
+                cargar_combos();
                 return View(model);
             }
             catch (Exception)
@@ -221,9 +253,14 @@ namespace web.Controllers {
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_usuario()
+        public ActionResult GridViewPartial_usuario(string us_tipo="")
         {
-            var model = odata.get_list();
+            ViewBag.lst_usuario = odata.get_list(us_tipo);
+            //var model = odata.get_list(us_tipo);
+            tbl_usuario_info model = new tbl_usuario_info
+            {
+                us_tipo = us_tipo
+            };
             return PartialView("_GridViewPartial_usuario", model);
         }
 

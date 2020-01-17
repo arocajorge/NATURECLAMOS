@@ -11,7 +11,6 @@
         <EntityTypeShape EntityType="Model_general.tbl_queja_tipo" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_general.tbl_queja_tipo_motivo" Width="1.5" PointX="3" PointY="11.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_general.tbl_sucursal" Width="1.5" PointX="3" PointY="16.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model_general.tbl_usuario" Width="1.5" PointX="3" PointY="19.375" IsExpanded="true" />
         <AssociationConnector Association="Model_general.FK_tbl_queja_tipo_motivo_tbl_queja_tipo" ManuallyRouted="false" />
         <EntityTypeShape EntityType="Model_general.tbl_queja_estado" Width="1.5" PointX="3" PointY="7.5" />
         <EntityTypeShape EntityType="Model_general.tbl_reporte_no_conformidad_det" Width="1.5" PointX="9.75" PointY="10.375" />
@@ -30,8 +29,9 @@
         <AssociationConnector Association="Model_general.FK_tbl_queja_tbl_queja_tipo" />
         <AssociationConnector Association="Model_general.FK_tbl_queja_tbl_queja_tipo_motivo" />
         <AssociationConnector Association="Model_general.FK_tbl_queja_tbl_sucursal" />
-        <AssociationConnector Association="Model_general.FK_tbl_queja_tbl_usuario" />
         <AssociationConnector Association="Model_general.FK_tbl_reporte_no_conformidad_tbl_queja" />
+        <EntityTypeShape EntityType="Model_general.tbl_usuario" Width="1.5" PointX="7.375" PointY="0.875" />
+        <AssociationConnector Association="Model_general.FK_tbl_queja_tbl_usuario" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

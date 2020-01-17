@@ -58,16 +58,6 @@
     <Property Name="estado" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="tbl_queja" Relationship="Model_general.FK_tbl_queja_tbl_sucursal" FromRole="tbl_sucursal" ToRole="tbl_queja" />
   </EntityType>
-  <EntityType Name="tbl_usuario">
-    <Key>
-      <PropertyRef Name="IdUsuario" />
-    </Key>
-    <Property Name="IdUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="us_contrasenia" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="us_nombre" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-    <Property Name="us_estado" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="tbl_queja" Relationship="Model_general.FK_tbl_queja_tbl_usuario" FromRole="tbl_usuario" ToRole="tbl_queja" />
-  </EntityType>
   <Association Name="FK_tbl_queja_tipo_motivo_tbl_queja_tipo">
     <End Role="tbl_queja_tipo" Type="Self.tbl_queja_tipo" Multiplicity="1" />
     <End Role="tbl_queja_tipo_motivo" Type="Self.tbl_queja_tipo_motivo" Multiplicity="*" />
@@ -87,7 +77,6 @@
     <EntitySet Name="tbl_queja_tipo" EntityType="Self.tbl_queja_tipo" />
     <EntitySet Name="tbl_queja_tipo_motivo" EntityType="Self.tbl_queja_tipo_motivo" />
     <EntitySet Name="tbl_sucursal" EntityType="Self.tbl_sucursal" />
-    <EntitySet Name="tbl_usuario" EntityType="Self.tbl_usuario" />
     <AssociationSet Name="FK_tbl_queja_tipo_motivo_tbl_queja_tipo" Association="Self.FK_tbl_queja_tipo_motivo_tbl_queja_tipo">
       <End Role="tbl_queja_tipo" EntitySet="tbl_queja_tipo" />
       <End Role="tbl_queja_tipo_motivo" EntitySet="tbl_queja_tipo_motivo" />
@@ -139,13 +128,14 @@
       <End Role="tbl_sucursal" EntitySet="tbl_sucursal" />
       <End Role="tbl_queja" EntitySet="tbl_queja" />
     </AssociationSet>
-    <AssociationSet Name="FK_tbl_queja_tbl_usuario" Association="Model_general.FK_tbl_queja_tbl_usuario">
-      <End Role="tbl_usuario" EntitySet="tbl_usuario" />
-      <End Role="tbl_queja" EntitySet="tbl_queja" />
-    </AssociationSet>
     <AssociationSet Name="FK_tbl_reporte_no_conformidad_tbl_queja" Association="Model_general.FK_tbl_reporte_no_conformidad_tbl_queja">
       <End Role="tbl_queja" EntitySet="tbl_queja" />
       <End Role="tbl_reporte_no_conformidad" EntitySet="tbl_reporte_no_conformidad" />
+    </AssociationSet>
+    <EntitySet Name="tbl_usuario" EntityType="Model_general.tbl_usuario" />
+    <AssociationSet Name="FK_tbl_queja_tbl_usuario" Association="Model_general.FK_tbl_queja_tbl_usuario">
+      <End Role="tbl_usuario" EntitySet="tbl_usuario" />
+      <End Role="tbl_queja" EntitySet="tbl_queja" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="tbl_queja_estado">
@@ -280,8 +270,8 @@
     <NavigationProperty Name="tbl_queja_tipo" Relationship="Model_general.FK_tbl_queja_tbl_queja_tipo" FromRole="tbl_queja" ToRole="tbl_queja_tipo" />
     <NavigationProperty Name="tbl_queja_tipo_motivo" Relationship="Model_general.FK_tbl_queja_tbl_queja_tipo_motivo" FromRole="tbl_queja" ToRole="tbl_queja_tipo_motivo" />
     <NavigationProperty Name="tbl_sucursal" Relationship="Model_general.FK_tbl_queja_tbl_sucursal" FromRole="tbl_queja" ToRole="tbl_sucursal" />
-    <NavigationProperty Name="tbl_usuario" Relationship="Model_general.FK_tbl_queja_tbl_usuario" FromRole="tbl_queja" ToRole="tbl_usuario" />
     <NavigationProperty Name="tbl_reporte_no_conformidad" Relationship="Model_general.FK_tbl_reporte_no_conformidad_tbl_queja" FromRole="tbl_queja" ToRole="tbl_reporte_no_conformidad" />
+    <NavigationProperty Name="tbl_usuario" Relationship="Model_general.FK_tbl_queja_tbl_usuario" FromRole="tbl_queja" ToRole="tbl_usuario" />
   </EntityType>
   <Association Name="FK_tbl_queja_tbl_departamento">
     <End Type="Model_general.tbl_departamento" Role="tbl_departamento" Multiplicity="1" />
@@ -379,18 +369,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_tbl_queja_tbl_usuario">
-    <End Type="Model_general.tbl_usuario" Role="tbl_usuario" Multiplicity="1" />
-    <End Type="Model_general.tbl_queja" Role="tbl_queja" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbl_usuario">
-        <PropertyRef Name="IdUsuario" />
-      </Principal>
-      <Dependent Role="tbl_queja">
-        <PropertyRef Name="IdUsuario" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_tbl_reporte_no_conformidad_tbl_queja">
     <End Type="Model_general.tbl_queja" Role="tbl_queja" Multiplicity="1" />
     <End Type="Model_general.tbl_reporte_no_conformidad" Role="tbl_reporte_no_conformidad" Multiplicity="*" />
@@ -400,6 +378,29 @@
       </Principal>
       <Dependent Role="tbl_reporte_no_conformidad">
         <PropertyRef Name="IdQueja" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="tbl_usuario">
+    <Key>
+      <PropertyRef Name="IdUsuario" />
+    </Key>
+    <Property Name="IdUsuario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="us_contrasenia" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="us_nombre" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="us_tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="us_estado" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="tbl_queja" Relationship="Model_general.FK_tbl_queja_tbl_usuario" FromRole="tbl_usuario" ToRole="tbl_queja" />
+  </EntityType>
+  <Association Name="FK_tbl_queja_tbl_usuario">
+    <End Type="Model_general.tbl_usuario" Role="tbl_usuario" Multiplicity="1" />
+    <End Type="Model_general.tbl_queja" Role="tbl_queja" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_usuario">
+        <PropertyRef Name="IdUsuario" />
+      </Principal>
+      <Dependent Role="tbl_queja">
+        <PropertyRef Name="IdUsuario" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
