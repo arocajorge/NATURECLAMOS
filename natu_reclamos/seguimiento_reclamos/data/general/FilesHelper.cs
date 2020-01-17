@@ -69,7 +69,7 @@ namespace data.general
                 if (info == null)
                     return new List<tbl_queja_imagen>();
 
-                string url_pagina_web = "http://quejas.degeremcia.com";
+                string url_pagina_web = "http://mejoras.degeremcia.com";
 
                 string ftpurl = String.Format("{0}/{1}", info.ftp_url, IdQueja);
                 FtpWebRequest ftpRequest = (FtpWebRequest)WebRequest.Create(ftpurl);
