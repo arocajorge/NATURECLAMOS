@@ -63,6 +63,8 @@ namespace info.general
         public Nullable<DateTime> fecha_ini { get; set; }
         [Display(Name = "Fecha fin")]
         public Nullable<DateTime> fecha_fin { get; set; }
+        public Nullable<int> IdDepartamentoFiltro { get; set; }
+        public Nullable<int> IdQueja_estadoFiltro { get; set; }
         #endregion
 
         public tbl_queja_canal_Info info_canal { get; set; }

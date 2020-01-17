@@ -11,6 +11,11 @@
 
 @using (Html.BeginForm("Modificar", "Reclamo", FormMethod.Post))
 {
+    @Html.HiddenFor(q => q.fecha_ini)
+    @Html.HiddenFor(q => q.fecha_fin)
+    @Html.HiddenFor(q => q.IdQueja_estadoFiltro)
+    @Html.HiddenFor(q => q.IdDepartamentoFiltro)
+
     @Html.HiddenFor(q=>q.IdQueja)
         @Html.DevExpress().FormLayout(settings =>
    {
@@ -181,7 +186,7 @@
                    b.Text = "Cancelar";
                    b.Style.Add("margin-left", "4px");
                    b.ControlStyle.CssClass = "editFormButton";
-                   b.ClientSideEvents.Click = "function(s, e){ document.location='" + DevExpressHelper.GetUrl(new { Controller = "Reclamo", Action = "Index" }) + "'; }";
+                   b.ClientSideEvents.Click = "function(s, e){ document.location='" + DevExpressHelper.GetUrl(new { Controller = "Reclamo", Action = "Index", FechaIni = Model.fecha_ini, FechaFin = Model.fecha_fin, IdDepartamentoFiltro = Model.IdDepartamentoFiltro, IdQueja_estadoFiltro = Model.IdQueja_estadoFiltro }) + "'; }";
                }).Render();
            });
        });

@@ -4,7 +4,7 @@
     var grid = Html.DevExpress().GridView(settings =>
     {
         settings.Name = "GridView_reclamos";
-        settings.CallbackRouteValues = new { Controller = "Reclamo", Action = "GridViewPartial_reclamos", fecha_ini = Model.fecha_ini, fecha_fin = Model.fecha_fin, IdDepartamento = Model.IdDepartamento, IdQueja_estado=Model.IdQueja_estado };
+        settings.CallbackRouteValues = new { Controller = "Reclamo", Action = "GridViewPartial_reclamos", fecha_ini = Model.fecha_ini, fecha_fin = Model.fecha_fin, IdDepartamento = Model.IdDepartamentoFiltro, IdQueja_estado=Model.IdQueja_estadoFiltro };
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdQueja";
 
@@ -47,8 +47,8 @@
                 if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "info_estado.qe_se_modifica" )) == true)
                 {
                     ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdQueja = DataBinder.Eval(tc.DataItem, "IdQueja") }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdQueja = DataBinder.Eval(tc.DataItem, "IdQueja") },
+                Html.ActionLink("Modificar", "Modificar", new { IdQueja = DataBinder.Eval(tc.DataItem, "IdQueja"), FechaIni = Model.fecha_ini, FechaFin = Model.fecha_fin, IdDepartamentoFiltro = Model.IdDepartamentoFiltro, IdQueja_estadoFiltro = Model.IdQueja_estadoFiltro }) + "&nbsp;" +
+                        Html.ActionLink("Anular", "Anular", new { IdQueja = DataBinder.Eval(tc.DataItem, "IdQueja"), FechaIni = Model.fecha_ini, FechaFin = Model.fecha_fin, IdDepartamentoFiltro = Model.IdDepartamentoFiltro, IdQueja_estadoFiltro = Model.IdQueja_estadoFiltro },
                             new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                     );
                 }
@@ -56,7 +56,7 @@
             c.SetHeaderTemplateContent(tc =>
             {
                 ViewContext.Writer.Write(
-                    Html.ActionLink("Nuevo", "Nuevo").ToHtmlString()
+                    Html.ActionLink("Nuevo", "Nuevo", new { FechaIni = Model.fecha_ini, FechaFin = Model.fecha_fin, IdDepartamentoFiltro = Model.IdDepartamentoFiltro, IdQueja_estadoFiltro = Model.IdQueja_estadoFiltro }).ToHtmlString()
                 );
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;
@@ -89,20 +89,20 @@
         settings.Columns.Add("info_estado.qe_se_modifica").Visible = false;
         settings.Columns.Add("IdUsuario","Usuario").Width = Unit.Pixel(100);
         settings.Columns.Add("IdUsuarioCierre", "Usuario Cierre").Width = Unit.Pixel(100);
-        
+
         settings.Columns.Add(column =>
-{
-    column.Caption = "";
-    column.SetDataItemTemplateContent(container =>
-    {
-        Html.DevExpress().HyperLink(hyperlink =>
         {
-            var keyValue = DataBinder.Eval(container.DataItem, "IdQueja");
-            hyperlink.Properties.Text = "Ver adjuntos";
-            hyperlink.NavigateUrl = Url.Action("Adjuntos", "Reclamo", new { IdQueja = keyValue });
-        }).Render();
-    });
-});
+            column.Caption = "";
+            column.SetDataItemTemplateContent(container =>
+            {
+                Html.DevExpress().HyperLink(hyperlink =>
+                {
+                    var keyValue = DataBinder.Eval(container.DataItem, "IdQueja");
+                    hyperlink.Properties.Text = "Ver adjuntos";
+                    hyperlink.NavigateUrl = Url.Action("Adjuntos", "Reclamo", new { IdQueja = keyValue });
+                }).Render();
+            });
+        });
         settings.Columns.Add(column =>
         {
             column.Caption = "";
