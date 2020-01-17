@@ -1,7 +1,7 @@
 ﻿@model info.general.tbl_queja_Info
 
 @{
-    ViewBag.Title = "Anular";
+    ViewBag.Title = "Nuevo";
 }
 
 @if (ViewBag.mensaje != null)
@@ -9,9 +9,8 @@
     <h2>@ViewBag.mensaje</h2>
 }
 
-@using (Html.BeginForm("Anular", "Reclamo", FormMethod.Post))
+@using (Html.BeginForm("Nuevo", "ReclamoResumen", FormMethod.Post, new { @id = "form1"}))
 {
-    @Html.HiddenFor(q=>q.IdQueja)
         @Html.DevExpress().FormLayout(settings =>
    {
        settings.Name = "formLayout";
@@ -21,7 +20,7 @@
 
        var groupItem = settings.Items.AddGroupItem(i =>
        {
-           i.Caption = "Anular mejora";
+           i.Caption = "Nueva mejora";
            i.SettingsItemHelpTexts.Position = HelpTextPosition.Bottom;
        });
        groupItem.Items.Add(m => m.qu_fecha, i =>
@@ -29,7 +28,6 @@
            i.NestedExtension().DateEdit(s =>
            {
                s.Width = Unit.Pixel(100);
-               s.ReadOnly = true;
                s.Properties.EditFormat = EditFormat.DateTime;
                s.Properties.DisplayFormatString = "dd/MM/yyyy";
            });
@@ -48,6 +46,7 @@
            i.NestedExtension().ComboBox(s =>
            {
                s.Width = Unit.Percentage(100);
+               s.ReadOnly = true;
                s.Properties.DataSource = ViewBag.lst_estado;
                s.Properties.TextField = "qe_descripcion";
                s.Properties.ValueField = "IdQueja_estado";
@@ -122,6 +121,7 @@
                Html.RenderPartial("_ComboBoxPartial_motivo_x_tipo");
            });
        });
+
        groupItem.Items.Add(m => m.qu_detalle, i =>
        {
            i.NestedExtension().Memo(s =>
@@ -160,6 +160,20 @@
 
        groupItem.Items.Add(i =>
        {
+           i.Caption = "Adjuntar archivos";
+           i.NestedExtension().UploadControl(uc =>
+           {
+               uc.Name = "UploadControl";
+               uc.ShowUploadButton = false;
+               uc.ValidationSettings.Assign(web.Controllers.HomeControllerControllerUploadControlSettings.UploadControlValidationSettings);
+               uc.Width = Unit.Percentage(100);
+               uc.NullText = "== Seleccione los archivos ==";
+               uc.FileInputCount = 4;
+           });
+       });
+
+       groupItem.Items.Add(i =>
+       {
            i.Caption = "";
            i.Paddings.PaddingTop = 24;
            i.SetNestedContent(() =>
@@ -167,7 +181,7 @@
                Html.DevExpress().Button(b =>
                {
                    b.Name = "UpdateBtn";
-                   b.Text = "Anular";
+                   b.Text = "Guardar";
                    b.ControlStyle.CssClass = "editFormButton";
                    b.UseSubmitBehavior = true;
                }).Render();
@@ -177,9 +191,9 @@
                    b.Text = "Cancelar";
                    b.Style.Add("margin-left", "4px");
                    b.ControlStyle.CssClass = "editFormButton";
-                   b.ClientSideEvents.Click = "function(s, e){ document.location='" + DevExpressHelper.GetUrl(new { Controller = "Reclamo", Action = "Index" }) + "'; }";
+                   b.ClientSideEvents.Click = "function(s, e){ document.location='" + DevExpressHelper.GetUrl(new { Controller = "ReclamoResumen", Action = "Index" }) + "'; }";
                }).Render();
            });
        });
-   }).GetHtml()
+   }).Bind(Model).GetHtml()
 }

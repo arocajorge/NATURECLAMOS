@@ -105,6 +105,7 @@
       <End Role="tbl_reporte_no_conformidad" EntitySet="tbl_reporte_no_conformidad" />
     </AssociationSet>
     <EntitySet Name="tbl_mes" EntityType="Model_general.tbl_mes" />
+    <EntitySet Name="tbl_parametros_correo" EntityType="Model_general.tbl_parametros_correo" />
     <EntitySet Name="tbl_queja" EntityType="Model_general.tbl_queja" />
     <AssociationSet Name="FK_tbl_queja_tbl_departamento" Association="Model_general.FK_tbl_queja_tbl_departamento">
       <End Role="tbl_departamento" EntitySet="tbl_departamento" />
@@ -146,7 +147,6 @@
       <End Role="tbl_queja" EntitySet="tbl_queja" />
       <End Role="tbl_reporte_no_conformidad" EntitySet="tbl_reporte_no_conformidad" />
     </AssociationSet>
-    <EntitySet Name="tbl_parametros_correo" EntityType="Model_general.tbl_parametros_correo" />
   </EntityContainer>
   <EntityType Name="tbl_queja_estado">
     <Key>
@@ -231,6 +231,23 @@
     <Property Name="me_codigo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="tbl_queja" Relationship="Model_general.FK_tbl_queja_tbl_mes" FromRole="tbl_mes" ToRole="tbl_queja" />
   </EntityType>
+  <EntityType Name="tbl_parametros_correo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="correo_cuenta" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="correo_cuenta_destinatario" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="correo_contrasenia" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="correo_asunto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="puerto" Type="Int32" Nullable="false" />
+    <Property Name="host" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="permitir_ssl" Type="Boolean" Nullable="false" />
+    <Property Name="enviar_correo_al_guardar_queja" Type="Boolean" Nullable="false" />
+    <Property Name="ftp_usuario" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="ftp_contrasenia" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="ftp_url" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+  </EntityType>
   <EntityType Name="tbl_queja">
     <Key>
       <PropertyRef Name="IdQueja" />
@@ -246,12 +263,14 @@
     <Property Name="qu_detalle" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="qu_solucion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="qu_fecha" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="qu_fecha_evento" Type="DateTime" Precision="3" />
     <Property Name="IdMes" Type="Int32" Nullable="false" />
     <Property Name="qu_anio" Type="Int32" Nullable="false" />
     <Property Name="cl_nombre" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="cl_telefono" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
     <Property Name="cl_correo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="IdUsuario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IdUsuarioCierre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="estado" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="tbl_departamento" Relationship="Model_general.FK_tbl_queja_tbl_departamento" FromRole="tbl_queja" ToRole="tbl_departamento" />
     <NavigationProperty Name="tbl_mes" Relationship="Model_general.FK_tbl_queja_tbl_mes" FromRole="tbl_queja" ToRole="tbl_mes" />
@@ -384,21 +403,4 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityType Name="tbl_parametros_correo">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" />
-    <Property Name="correo_cuenta" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-    <Property Name="correo_cuenta_destinatario" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="correo_contrasenia" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-    <Property Name="correo_asunto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="puerto" Type="Int32" Nullable="false" />
-    <Property Name="host" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-    <Property Name="permitir_ssl" Type="Boolean" Nullable="false" />
-    <Property Name="enviar_correo_al_guardar_queja" Type="Boolean" Nullable="false" />
-    <Property Name="ftp_usuario" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-    <Property Name="ftp_contrasenia" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-    <Property Name="ftp_url" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
-  </EntityType>
 </Schema>

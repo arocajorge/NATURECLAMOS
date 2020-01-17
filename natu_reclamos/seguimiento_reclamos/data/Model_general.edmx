@@ -53,12 +53,14 @@
           <Property Name="qu_detalle" Type="varchar(max)" />
           <Property Name="qu_solucion" Type="varchar(max)" />
           <Property Name="qu_fecha" Type="datetime" Nullable="false" />
+          <Property Name="qu_fecha_evento" Type="datetime" />
           <Property Name="IdMes" Type="int" Nullable="false" />
           <Property Name="qu_anio" Type="int" Nullable="false" />
           <Property Name="cl_nombre" Type="varchar" MaxLength="500" />
           <Property Name="cl_telefono" Type="varchar" MaxLength="200" />
           <Property Name="cl_correo" Type="varchar" MaxLength="500" />
           <Property Name="IdUsuario" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdUsuarioCierre" Type="varchar" MaxLength="50" />
           <Property Name="estado" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="tbl_queja_canal">
@@ -489,6 +491,7 @@
             <End Role="tbl_reporte_no_conformidad" EntitySet="tbl_reporte_no_conformidad" />
           </AssociationSet>
           <EntitySet Name="tbl_mes" EntityType="Model_general.tbl_mes" />
+          <EntitySet Name="tbl_parametros_correo" EntityType="Model_general.tbl_parametros_correo" />
           <EntitySet Name="tbl_queja" EntityType="Model_general.tbl_queja" />
           <AssociationSet Name="FK_tbl_queja_tbl_departamento" Association="Model_general.FK_tbl_queja_tbl_departamento">
             <End Role="tbl_departamento" EntitySet="tbl_departamento" />
@@ -530,7 +533,6 @@
             <End Role="tbl_queja" EntitySet="tbl_queja" />
             <End Role="tbl_reporte_no_conformidad" EntitySet="tbl_reporte_no_conformidad" />
           </AssociationSet>
-          <EntitySet Name="tbl_parametros_correo" EntityType="Model_general.tbl_parametros_correo" />
           </EntityContainer>
         <EntityType Name="tbl_queja_estado">
           <Key>
@@ -615,6 +617,23 @@
           <Property Name="me_codigo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="tbl_queja" Relationship="Model_general.FK_tbl_queja_tbl_mes" FromRole="tbl_mes" ToRole="tbl_queja" />
         </EntityType>
+        <EntityType Name="tbl_parametros_correo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="correo_cuenta" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="correo_cuenta_destinatario" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="correo_contrasenia" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="correo_asunto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="puerto" Type="Int32" Nullable="false" />
+          <Property Name="host" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="permitir_ssl" Type="Boolean" Nullable="false" />
+          <Property Name="enviar_correo_al_guardar_queja" Type="Boolean" Nullable="false" />
+          <Property Name="ftp_usuario" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ftp_contrasenia" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ftp_url" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="tbl_queja">
           <Key>
             <PropertyRef Name="IdQueja" />
@@ -630,12 +649,14 @@
           <Property Name="qu_detalle" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="qu_solucion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="qu_fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="qu_fecha_evento" Type="DateTime" Precision="3" />
           <Property Name="IdMes" Type="Int32" Nullable="false" />
           <Property Name="qu_anio" Type="Int32" Nullable="false" />
           <Property Name="cl_nombre" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="cl_telefono" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="cl_correo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="IdUsuario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuarioCierre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="estado" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="tbl_departamento" Relationship="Model_general.FK_tbl_queja_tbl_departamento" FromRole="tbl_queja" ToRole="tbl_departamento" />
           <NavigationProperty Name="tbl_mes" Relationship="Model_general.FK_tbl_queja_tbl_mes" FromRole="tbl_queja" ToRole="tbl_mes" />
@@ -768,23 +789,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="tbl_parametros_correo">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="correo_cuenta" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="correo_cuenta_destinatario" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="correo_contrasenia" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="correo_asunto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="puerto" Type="Int32" Nullable="false" />
-          <Property Name="host" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="permitir_ssl" Type="Boolean" Nullable="false" />
-          <Property Name="enviar_correo_al_guardar_queja" Type="Boolean" Nullable="false" />
-          <Property Name="ftp_usuario" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="ftp_contrasenia" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="ftp_url" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
-        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -913,30 +917,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tbl_queja">
-            <EntityTypeMapping TypeName="Model_general.tbl_queja">
-              <MappingFragment StoreEntitySet="tbl_queja">
-                <ScalarProperty Name="estado" ColumnName="estado" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="cl_correo" ColumnName="cl_correo" />
-                <ScalarProperty Name="cl_telefono" ColumnName="cl_telefono" />
-                <ScalarProperty Name="cl_nombre" ColumnName="cl_nombre" />
-                <ScalarProperty Name="qu_anio" ColumnName="qu_anio" />
-                <ScalarProperty Name="IdMes" ColumnName="IdMes" />
-                <ScalarProperty Name="qu_fecha" ColumnName="qu_fecha" />
-                <ScalarProperty Name="qu_solucion" ColumnName="qu_solucion" />
-                <ScalarProperty Name="qu_detalle" ColumnName="qu_detalle" />
-                <ScalarProperty Name="IdQueja_estado" ColumnName="IdQueja_estado" />
-                <ScalarProperty Name="IdQueja_motivo" ColumnName="IdQueja_motivo" />
-                <ScalarProperty Name="IdQueja_tipo" ColumnName="IdQueja_tipo" />
-                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
-                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
-                <ScalarProperty Name="IdQueja_origen" ColumnName="IdQueja_origen" />
-                <ScalarProperty Name="IdQueja_canal" ColumnName="IdQueja_canal" />
-                <ScalarProperty Name="IdQueja" ColumnName="IdQueja" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="tbl_parametros_correo">
             <EntityTypeMapping TypeName="Model_general.tbl_parametros_correo">
               <MappingFragment StoreEntitySet="tbl_parametros_correo">
@@ -952,6 +932,32 @@
                 <ScalarProperty Name="correo_cuenta_destinatario" ColumnName="correo_cuenta_destinatario" />
                 <ScalarProperty Name="correo_cuenta" ColumnName="correo_cuenta" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_queja">
+            <EntityTypeMapping TypeName="Model_general.tbl_queja">
+              <MappingFragment StoreEntitySet="tbl_queja">
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="IdUsuarioCierre" ColumnName="IdUsuarioCierre" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="cl_correo" ColumnName="cl_correo" />
+                <ScalarProperty Name="cl_telefono" ColumnName="cl_telefono" />
+                <ScalarProperty Name="cl_nombre" ColumnName="cl_nombre" />
+                <ScalarProperty Name="qu_anio" ColumnName="qu_anio" />
+                <ScalarProperty Name="IdMes" ColumnName="IdMes" />
+                <ScalarProperty Name="qu_fecha_evento" ColumnName="qu_fecha_evento" />
+                <ScalarProperty Name="qu_fecha" ColumnName="qu_fecha" />
+                <ScalarProperty Name="qu_solucion" ColumnName="qu_solucion" />
+                <ScalarProperty Name="qu_detalle" ColumnName="qu_detalle" />
+                <ScalarProperty Name="IdQueja_estado" ColumnName="IdQueja_estado" />
+                <ScalarProperty Name="IdQueja_motivo" ColumnName="IdQueja_motivo" />
+                <ScalarProperty Name="IdQueja_tipo" ColumnName="IdQueja_tipo" />
+                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdQueja_origen" ColumnName="IdQueja_origen" />
+                <ScalarProperty Name="IdQueja_canal" ColumnName="IdQueja_canal" />
+                <ScalarProperty Name="IdQueja" ColumnName="IdQueja" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

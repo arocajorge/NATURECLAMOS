@@ -42,6 +42,9 @@ namespace info.general
         [Required]
         [Display(Name = "Fecha")]
         public System.DateTime qu_fecha { get; set; }
+        [Required]
+        [Display(Name = "Fecha")]
+        public Nullable<System.DateTime> qu_fecha_evento { get; set; }
         public int IdMes { get; set; }
         public int qu_anio { get; set; }
         [Display(Name = "Nombre cliente")]
@@ -52,6 +55,7 @@ namespace info.general
         public string cl_correo { get; set; }
         [Display(Name = "Usuario")]
         public string IdUsuario { get; set; }
+        public string IdUsuarioCierre { get; set; }
         public bool estado { get; set; }
 
         #region Filtros

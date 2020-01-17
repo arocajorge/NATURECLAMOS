@@ -1,7 +1,7 @@
 ﻿@model info.general.tbl_queja_Info
 
 @{
-    ViewBag.Title = "Anular";
+    ViewBag.Title = "Modificar";
 }
 
 @if (ViewBag.mensaje != null)
@@ -9,7 +9,7 @@
     <h2>@ViewBag.mensaje</h2>
 }
 
-@using (Html.BeginForm("Anular", "Reclamo", FormMethod.Post))
+@using (Html.BeginForm("Modificar", "ReclamoResumen", FormMethod.Post))
 {
     @Html.HiddenFor(q=>q.IdQueja)
         @Html.DevExpress().FormLayout(settings =>
@@ -21,7 +21,7 @@
 
        var groupItem = settings.Items.AddGroupItem(i =>
        {
-           i.Caption = "Anular mejora";
+           i.Caption = "Modificar mejora";
            i.SettingsItemHelpTexts.Position = HelpTextPosition.Bottom;
        });
        groupItem.Items.Add(m => m.qu_fecha, i =>
@@ -160,6 +160,20 @@
 
        groupItem.Items.Add(i =>
        {
+           i.Caption = "Adjuntar archivos";
+           i.NestedExtension().UploadControl(uc =>
+           {
+               uc.Name = "UploadControl";
+               uc.ShowUploadButton = false;
+               uc.ValidationSettings.Assign(web.Controllers.HomeControllerControllerUploadControlSettings.UploadControlValidationSettings);
+               uc.Width = Unit.Percentage(100);
+               uc.NullText = "== Seleccione los archivos ==";
+               uc.FileInputCount = 4;
+           });
+       });
+
+       groupItem.Items.Add(i =>
+       {
            i.Caption = "";
            i.Paddings.PaddingTop = 24;
            i.SetNestedContent(() =>
@@ -167,7 +181,7 @@
                Html.DevExpress().Button(b =>
                {
                    b.Name = "UpdateBtn";
-                   b.Text = "Anular";
+                   b.Text = "Guardar";
                    b.ControlStyle.CssClass = "editFormButton";
                    b.UseSubmitBehavior = true;
                }).Render();
@@ -177,7 +191,7 @@
                    b.Text = "Cancelar";
                    b.Style.Add("margin-left", "4px");
                    b.ControlStyle.CssClass = "editFormButton";
-                   b.ClientSideEvents.Click = "function(s, e){ document.location='" + DevExpressHelper.GetUrl(new { Controller = "Reclamo", Action = "Index" }) + "'; }";
+                   b.ClientSideEvents.Click = "function(s, e){ document.location='" + DevExpressHelper.GetUrl(new { Controller = "ReclamoResumen", Action = "Index" }) + "'; }";
                }).Render();
            });
        });

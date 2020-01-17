@@ -9,10 +9,15 @@ namespace data.general
 {
     public class tbl_queja_Data
     {
-        public List<tbl_queja_Info> get_list(DateTime? fecha_ini, DateTime? Fecha_fin)
+        public List<tbl_queja_Info> get_list(DateTime? fecha_ini, DateTime? Fecha_fin, int IdDepartamento, int IdQueja_estado)
         {
             try
             {
+                int IdDepartamento_ini = IdDepartamento;
+                int IdDepartamento_fin = (IdDepartamento == 0 ? 999999 : IdDepartamento);
+                int Estado_ini = IdQueja_estado;
+                int Estado_fin = (IdQueja_estado == 0 ? 999999 : IdQueja_estado);
+
                 List<tbl_queja_Info> Lista;
                 fecha_ini = fecha_ini == null ? new DateTime(DateTime.Now.Year, 1, 1) : Convert.ToDateTime(fecha_ini).Date;
                 Fecha_fin = Fecha_fin == null ? new DateTime(DateTime.Now.Year, 12, 31) : Convert.ToDateTime(Fecha_fin).Date;
@@ -37,6 +42,8 @@ namespace data.general
                              on new { q.IdMes } equals new { me.IdMes}                             
                              where q.estado == true
                              && fecha_ini <= q.qu_fecha && q.qu_fecha <= Fecha_fin
+                             && q.IdDepartamento >= IdDepartamento_ini && q.IdDepartamento<=IdDepartamento_fin
+                             && q.IdQueja_estado>= Estado_ini && q.IdQueja_estado<=Estado_fin
                              select new tbl_queja_Info
                              {
                                  IdQueja = q.IdQueja,
@@ -53,6 +60,7 @@ namespace data.general
                                  qu_detalle = q.qu_detalle,
                                  qu_solucion = q.qu_solucion,
                                  IdUsuario = q.IdUsuario,
+                                 IdUsuarioCierre = q.IdUsuarioCierre,
                                  qu_fecha = q.qu_fecha,
                                  qu_anio = q.qu_anio,
                                  IdMes = q.IdMes,
@@ -239,6 +247,7 @@ namespace data.general
                             qu_solucion = q.qu_solucion,
                             IdUsuario = q.IdUsuario,
                             qu_fecha = q.qu_fecha,
+                            qu_fecha_evento = q.qu_fecha_evento,
                             qu_anio = q.qu_anio,
                             IdMes = q.IdMes,
                             estado = q.estado
@@ -284,7 +293,7 @@ namespace data.general
                     tbl_queja Entity = new tbl_queja
                     {
                         IdQueja = q.IdQueja = get_id(),
-                        IdDepartamento =Convert.ToInt32(q.IdDepartamento),
+                        IdDepartamento = Convert.ToInt32(q.IdDepartamento),
                         IdQueja_canal = Convert.ToInt32(q.IdQueja_canal),
                         IdQueja_estado = Convert.ToInt32(q.IdQueja_estado),
                         IdQueja_tipo = Convert.ToInt32(q.IdQueja_tipo),
@@ -297,7 +306,9 @@ namespace data.general
                         qu_detalle = q.qu_detalle,
                         qu_solucion = q.qu_solucion,
                         IdUsuario = q.IdUsuario,
+                        IdUsuarioCierre = null,
                         qu_fecha = q.qu_fecha,
+                        qu_fecha_evento = q.qu_fecha_evento,
                         qu_anio = q.qu_anio,
                         IdMes = q.IdMes,
                         estado = q.estado = true
@@ -336,7 +347,9 @@ namespace data.general
                     Entity.qu_detalle = info.qu_detalle;
                     Entity.qu_solucion = info.qu_solucion;
                     Entity.IdUsuario = info.IdUsuario;
+                    Entity.IdUsuarioCierre = info.IdUsuarioCierre;
                     Entity.qu_fecha = info.qu_fecha;
+                    Entity.qu_fecha_evento = info.qu_fecha_evento;
                     Entity.qu_anio = info.qu_anio;
                     Entity.IdMes = info.IdMes;
                     Context.SaveChanges();

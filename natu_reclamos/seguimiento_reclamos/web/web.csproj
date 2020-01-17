@@ -328,6 +328,14 @@
     <Content Include="Views\Reclamo\Imprimir.cshtml" />
     <Content Include="Views\ParametroCorreo\Index.cshtml" />
     <Content Include="Views\Reclamo\_Adjuntos.cshtml" />
+    <Content Include="Views\ReclamoResumen\Nuevo.cshtml" />
+    <Content Include="Views\ReclamoResumen\Modificar.cshtml" />
+    <Content Include="Views\ReclamoResumen\Index.cshtml" />
+    <Content Include="Views\ReclamoResumen\Imprimir.cshtml" />
+    <Content Include="Views\ReclamoResumen\Anular.cshtml" />
+    <Content Include="Views\ReclamoResumen\_GridViewPartial_reclamos_resumen.cshtml" />
+    <Content Include="Views\ReclamoResumen\_ComboBoxPartial_motivo_x_tipo.cshtml" />
+    <Content Include="Views\ReclamoResumen\_Adjuntos.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -350,6 +358,7 @@
     <Compile Include="Controllers\OrigenController.cs" />
     <Compile Include="Controllers\ParametroCorreoController.cs" />
     <Compile Include="Controllers\ReclamoController.cs" />
+    <Compile Include="Controllers\ReclamoResumenController.cs" />
     <Compile Include="Controllers\ReporteController.cs" />
     <Compile Include="Controllers\SucursalController.cs" />
     <Compile Include="Controllers\TipoController.cs" />
@@ -379,6 +388,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reportes\Rpt_quejas.resx">
       <DependentUpon>Rpt_quejas.cs</DependentUpon>
     </EmbeddedResource>

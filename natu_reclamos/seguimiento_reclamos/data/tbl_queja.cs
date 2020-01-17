@@ -31,12 +31,14 @@ namespace data
         public string qu_detalle { get; set; }
         public string qu_solucion { get; set; }
         public System.DateTime qu_fecha { get; set; }
+        public Nullable<System.DateTime> qu_fecha_evento { get; set; }
         public int IdMes { get; set; }
         public int qu_anio { get; set; }
         public string cl_nombre { get; set; }
         public string cl_telefono { get; set; }
         public string cl_correo { get; set; }
         public string IdUsuario { get; set; }
+        public string IdUsuarioCierre { get; set; }
         public bool estado { get; set; }
     
         public virtual tbl_departamento tbl_departamento { get; set; }

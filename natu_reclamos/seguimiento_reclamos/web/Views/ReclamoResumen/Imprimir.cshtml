@@ -1,0 +1,11 @@
+﻿@model Rpt_quejas
+
+@{
+    ViewBag.Title = "Imprimir";
+}
+@Html.DevExpress().WebDocumentViewer(settings =>
+{
+    settings.Name = "WebDocumentViewer";
+}).Bind(Model).GetHtml()
+
+
