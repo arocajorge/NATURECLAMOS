@@ -307,7 +307,7 @@ namespace data.general
                         qu_solucion = q.qu_solucion,
                         IdUsuario = q.IdUsuario,
                         IdUsuarioCierre = null,
-                        qu_fecha = q.qu_fecha,
+                        qu_fecha = DateTime.Now.Date,
                         qu_fecha_evento = q.qu_fecha_evento,
                         qu_anio = q.qu_anio,
                         IdMes = q.IdMes,
@@ -346,9 +346,11 @@ namespace data.general
                     Entity.cl_telefono = info.cl_telefono;
                     Entity.qu_detalle = info.qu_detalle;
                     Entity.qu_solucion = info.qu_solucion;
-                    Entity.IdUsuario = info.IdUsuario;
-                    Entity.IdUsuarioCierre = info.IdUsuarioCierre;
-                    Entity.qu_fecha = info.qu_fecha;
+
+                    var EstadoQueja = Context.tbl_queja_estado.Where(q => q.IdQueja_estado == info.IdQueja_estado).FirstOrDefault();
+                    if (EstadoQueja != null && EstadoQueja.qe_se_modifica == false)
+                        Entity.IdUsuarioCierre = info.IdUsuario;
+
                     Entity.qu_fecha_evento = info.qu_fecha_evento;
                     Entity.qu_anio = info.qu_anio;
                     Entity.IdMes = info.IdMes;

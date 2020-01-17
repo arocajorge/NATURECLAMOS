@@ -43,7 +43,7 @@ namespace info.general
         [Display(Name = "Fecha")]
         public System.DateTime qu_fecha { get; set; }
         [Required]
-        [Display(Name = "Fecha")]
+        [Display(Name = "Fecha evento")]
         public Nullable<System.DateTime> qu_fecha_evento { get; set; }
         public int IdMes { get; set; }
         public int qu_anio { get; set; }
