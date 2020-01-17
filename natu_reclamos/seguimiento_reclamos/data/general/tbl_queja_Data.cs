@@ -61,6 +61,7 @@ namespace data.general
                                  qu_solucion = q.qu_solucion,
                                  IdUsuario = q.IdUsuario,
                                  IdUsuarioCierre = q.IdUsuarioCierre,
+                                 qu_fecha_evento = q.qu_fecha_evento,
                                  qu_fecha = q.qu_fecha,
                                  qu_anio = q.qu_anio,
                                  IdMes = q.IdMes,
