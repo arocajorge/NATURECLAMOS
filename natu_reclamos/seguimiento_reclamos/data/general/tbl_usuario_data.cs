@@ -23,6 +23,7 @@ namespace data.general
                             select new tbl_usuario_info
                             {
                                 IdUsuario = q.IdUsuario,
+                                us_tipo = q.us_tipo,
                                 us_contrasenia = q.us_contrasenia,
                                 us_nombre = q.us_nombre,
                                 us_estado = q.us_estado
@@ -49,6 +50,7 @@ namespace data.general
                             select new tbl_usuario_info
                             {
                                 IdUsuario = q.IdUsuario,
+                                us_tipo=q.us_tipo,
                                 us_contrasenia = q.us_contrasenia,
                                 us_nombre = q.us_nombre,
                                 us_estado = q.us_estado
@@ -62,7 +64,7 @@ namespace data.general
             }
         }
 
-        public List<tbl_usuario_info> get_list()
+        public List<tbl_usuario_info> get_list(string us_tipo)
         {
             try
             {
@@ -71,6 +73,7 @@ namespace data.general
                 {
                     Lista = (from q in Context.tbl_usuario
                              where q.us_estado == true
+                             && q.us_tipo ==(us_tipo=="" ? q.us_tipo : us_tipo)
                              select new tbl_usuario_info
                              {
                                  IdUsuario = q.IdUsuario,
@@ -105,6 +108,7 @@ namespace data.general
                     tbl_usuario Entity = new tbl_usuario
                     {
                         IdUsuario = info.IdUsuario,
+                        us_tipo = info.us_tipo,
                         us_contrasenia = info.us_contrasenia,
                         us_nombre = info.us_nombre,
                         us_estado = info.us_estado = true
@@ -130,6 +134,7 @@ namespace data.general
                     if (Entity != null)
                     {
                         Entity.us_contrasenia = info.us_contrasenia;
+                        Entity.us_tipo = info.us_tipo;
                         Entity.us_nombre = info.us_nombre;
                         Context.SaveChanges();
                     }

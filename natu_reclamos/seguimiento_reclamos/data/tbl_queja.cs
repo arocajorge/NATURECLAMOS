@@ -49,8 +49,8 @@ namespace data
         public virtual tbl_queja_tipo tbl_queja_tipo { get; set; }
         public virtual tbl_queja_tipo_motivo tbl_queja_tipo_motivo { get; set; }
         public virtual tbl_sucursal tbl_sucursal { get; set; }
-        public virtual tbl_usuario tbl_usuario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_reporte_no_conformidad> tbl_reporte_no_conformidad { get; set; }
+        public virtual tbl_usuario tbl_usuario { get; set; }
     }
 }

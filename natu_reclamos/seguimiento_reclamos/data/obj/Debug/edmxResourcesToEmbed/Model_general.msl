@@ -57,16 +57,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="tbl_usuario">
-      <EntityTypeMapping TypeName="Model_general.tbl_usuario">
-        <MappingFragment StoreEntitySet="tbl_usuario">
-          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-          <ScalarProperty Name="us_contrasenia" ColumnName="us_contrasenia" />
-          <ScalarProperty Name="us_nombre" ColumnName="us_nombre" />
-          <ScalarProperty Name="us_estado" ColumnName="us_estado" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="tbl_queja_estado">
       <EntityTypeMapping TypeName="Model_general.tbl_queja_estado">
         <MappingFragment StoreEntitySet="tbl_queja_estado">
@@ -164,6 +154,17 @@
           <ScalarProperty Name="IdQueja_origen" ColumnName="IdQueja_origen" />
           <ScalarProperty Name="IdQueja_canal" ColumnName="IdQueja_canal" />
           <ScalarProperty Name="IdQueja" ColumnName="IdQueja" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_usuario">
+      <EntityTypeMapping TypeName="Model_general.tbl_usuario">
+        <MappingFragment StoreEntitySet="tbl_usuario">
+          <ScalarProperty Name="us_estado" ColumnName="us_estado" />
+          <ScalarProperty Name="us_tipo" ColumnName="us_tipo" />
+          <ScalarProperty Name="us_nombre" ColumnName="us_nombre" />
+          <ScalarProperty Name="us_contrasenia" ColumnName="us_contrasenia" />
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

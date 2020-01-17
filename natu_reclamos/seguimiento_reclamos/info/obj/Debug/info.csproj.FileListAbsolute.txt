@@ -5,6 +5,6 @@ C:\Users\aroca\Documents\GitHub\NATURECLAMOS\natu_reclamos\seguimiento_reclamos\
 C:\Users\aroca\Documents\GitHub\NATURECLAMOS\natu_reclamos\seguimiento_reclamos\info\obj\Debug\info.pdb
 C:\Users\Wendy\Documents\GitHub\NATURECLAMOS\natu_reclamos\seguimiento_reclamos\info\bin\Debug\info.dll
 C:\Users\Wendy\Documents\GitHub\NATURECLAMOS\natu_reclamos\seguimiento_reclamos\info\bin\Debug\info.pdb
+C:\Users\Wendy\Documents\GitHub\NATURECLAMOS\natu_reclamos\seguimiento_reclamos\info\obj\Debug\info.csprojResolveAssemblyReference.cache
 C:\Users\Wendy\Documents\GitHub\NATURECLAMOS\natu_reclamos\seguimiento_reclamos\info\obj\Debug\info.dll
 C:\Users\Wendy\Documents\GitHub\NATURECLAMOS\natu_reclamos\seguimiento_reclamos\info\obj\Debug\info.pdb
-C:\Users\Wendy\Documents\GitHub\NATURECLAMOS\natu_reclamos\seguimiento_reclamos\info\obj\Debug\info.csprojResolveAssemblyReference.cache

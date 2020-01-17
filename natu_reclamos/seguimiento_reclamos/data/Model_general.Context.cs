@@ -31,7 +31,6 @@ namespace data
         public virtual DbSet<tbl_queja_tipo> tbl_queja_tipo { get; set; }
         public virtual DbSet<tbl_queja_tipo_motivo> tbl_queja_tipo_motivo { get; set; }
         public virtual DbSet<tbl_sucursal> tbl_sucursal { get; set; }
-        public virtual DbSet<tbl_usuario> tbl_usuario { get; set; }
         public virtual DbSet<tbl_queja_estado> tbl_queja_estado { get; set; }
         public virtual DbSet<tbl_reporte_no_conformidad_det> tbl_reporte_no_conformidad_det { get; set; }
         public virtual DbSet<tbl_reporte_no_conformidad_tipo> tbl_reporte_no_conformidad_tipo { get; set; }
@@ -39,5 +38,6 @@ namespace data
         public virtual DbSet<tbl_mes> tbl_mes { get; set; }
         public virtual DbSet<tbl_parametros_correo> tbl_parametros_correo { get; set; }
         public virtual DbSet<tbl_queja> tbl_queja { get; set; }
+        public virtual DbSet<tbl_usuario> tbl_usuario { get; set; }
     }
 }

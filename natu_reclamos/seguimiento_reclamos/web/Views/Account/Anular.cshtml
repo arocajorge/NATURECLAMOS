@@ -27,6 +27,18 @@
        {
            i.NestedExtension().TextBox(s => { s.Width = Unit.Percentage(100); s.ReadOnly = true; });
        });
+       groupItem.Items.Add(m => m.us_tipo, i =>
+       {
+           i.NestedExtension().ComboBox(c =>
+           {
+               c.Width = Unit.Pixel(200);
+               c.Properties.DataSource = ViewBag.lst_tipo;
+               c.Properties.TextField = "Value";
+               c.Properties.ValueField = "Key";
+               c.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+               c.Properties.NullText = "== Seleccione ==";
+           });
+       });
        groupItem.Items.Add(m => m.us_contrasenia, i =>
        {
            i.NestedExtension().TextBox(s => s.Width = Unit.Percentage(100));

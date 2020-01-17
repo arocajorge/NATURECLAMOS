@@ -12,7 +12,9 @@
     settings.Groups.Add(group => {        
         group.Text = "Mejoras";
         group.Items.Add("Listado de mejoras").NavigateUrl = DevExpressHelper.GetUrl(new { Controller = "Reclamo", Action = "Index" });
-        if (@User.Identity.Name == "admin")
+        group.Items.Add("Listado resumido de mejoras").NavigateUrl = DevExpressHelper.GetUrl(new { Controller = "ReclamoResumen", Action = "Index" });
+        //if (@User.Identity.Name == "admin")
+        if(Session["TipoUsuario"].ToString() =="ADMINISTRADOR")
         {
             group.Items.Add("Usuarios").NavigateUrl = DevExpressHelper.GetUrl(new { Controller = "Account", Action = "Index" });
             group.Items.Add("Parámetros correo").NavigateUrl = DevExpressHelper.GetUrl(new { Controller = "ParametroCorreo", Action = "Index" });

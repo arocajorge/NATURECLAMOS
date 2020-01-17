@@ -388,7 +388,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reportes\Rpt_quejas.resx">
       <DependentUpon>Rpt_quejas.cs</DependentUpon>
     </EmbeddedResource>

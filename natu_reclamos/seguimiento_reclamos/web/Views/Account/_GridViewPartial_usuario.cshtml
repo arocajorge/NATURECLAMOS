@@ -1,7 +1,8 @@
+@model info.general.tbl_usuario_info
 @{
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridView_usuario";
-        settings.CallbackRouteValues = new { Controller = "Account", Action = "GridViewPartial_usuario" };
+        settings.CallbackRouteValues = new { Controller = "Account", Action = "GridViewPartial_usuario", us_tipo = Model.us_tipo };
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdUsuario";
 
@@ -47,4 +48,4 @@
         grid.SetEditErrorText((string)ViewData["EditError"]);
     }
 }
-@grid.Bind(Model).GetHtml()
+@grid.Bind(ViewBag.lst_usuario).GetHtml()

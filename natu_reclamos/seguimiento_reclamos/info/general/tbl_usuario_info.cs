@@ -18,6 +18,8 @@ namespace info.general
         public string us_contrasenia { get; set; }
         [Display(Name = "Nombre")]
         public string us_nombre { get; set; }
+        [Display(Name = "Tipo de usuario")]
+        public string us_tipo { get; set; }
         [Required]
         [Display(Name = "Estado")]
         public bool us_estado { get; set; }
