@@ -178,7 +178,7 @@ namespace web.Controllers
 
                 info_param = odata_param.get_info();
                 if (info_param != null && info_param.enviar_correo_al_guardar_queja == true)
-                    enviar_correo(model.IdQueja);
+                    enviar_correo(model.IdQueja, true);
 
                 return RedirectToAction("Index", "Reclamo", new { fecha_ini = model.fecha_ini, fecha_fin = model.fecha_fin, IdDepartamento = model.IdDepartamentoFiltro, IdQueja_estado = model.IdQueja_estadoFiltro });
             }
@@ -199,7 +199,7 @@ namespace web.Controllers
         
         #endregion
 
-        private void enviar_correo(decimal IdQueja)
+        private void enviar_correo(decimal IdQueja, bool EsNuevo)
         {
             #region Armar cuerpo del correo correo
             MailMessage mail = new MailMessage();
@@ -221,7 +221,14 @@ namespace web.Controllers
             tbl_queja_Info info_queja = odata.get_info_correo(IdQueja);
             if (info_queja != null)
             {
-                Body += "<p> Se ha creado una nueva mejora desde la aplicación <strong>Seguimiento de mejoras Naturissimo</strong></p><br>";
+                if (EsNuevo == true)
+                {
+                    Body += "<p> Se ha creado una nueva mejora desde la aplicación <strong>Seguimiento de mejoras Naturissimo</strong></p><br>";
+                }
+                else
+                {
+                    Body += "<p> Se ha modificado la mejora desde la aplicación <strong>Seguimiento de mejoras Naturissimo</strong></p><br>";
+                }
 
                 Body += "<strong># de Mejora: </strong>"+info_queja.IdQueja.ToString()+"<br>";
                 Body += "<strong> Fecha: </strong>"+ info_queja .qu_fecha+ "<br>";
@@ -306,6 +313,10 @@ namespace web.Controllers
                     if (item.ContentLength != 0)
                         FilesHelper.FtpUploadFile(item, item.FileName, model.IdQueja.ToString());
                 }
+
+                info_param = odata_param.get_info();
+                if (info_param != null && info_param.enviar_correo_al_guardar_queja == true)
+                    enviar_correo(model.IdQueja, false);
 
                 return RedirectToAction("Index", "Reclamo", new { fecha_ini = model.fecha_ini, fecha_fin = model.fecha_fin, IdDepartamento = model.IdDepartamentoFiltro, IdQueja_estado = model.IdQueja_estadoFiltro });
             }
