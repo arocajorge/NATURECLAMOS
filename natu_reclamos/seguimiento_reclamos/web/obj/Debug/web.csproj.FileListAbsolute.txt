@@ -285,7 +285,6 @@ C:\Users\aroca\Documents\GitHub\NATURECLAMOS\natu_reclamos\seguimiento_reclamos\
 C:\Users\aroca\Documents\GitHub\NATURECLAMOS\natu_reclamos\seguimiento_reclamos\web\obj\Debug\web.csproj.GenerateResource.Cache
 C:\Users\aroca\Documents\GitHub\NATURECLAMOS\natu_reclamos\seguimiento_reclamos\web\obj\Debug\web.dll
 C:\Users\aroca\Documents\GitHub\NATURECLAMOS\natu_reclamos\seguimiento_reclamos\web\obj\Debug\web.pdb
-C:\Users\AROCA\Documents\GitHub\NATURECLAMOS\natu_reclamos\seguimiento_reclamos\web\obj\Debug\web.dll.licenses
 C:\Users\Wendy\Documents\GitHub\NATURECLAMOS\natu_reclamos\seguimiento_reclamos\web\bin\web.dll.config
 C:\Users\Wendy\Documents\GitHub\NATURECLAMOS\natu_reclamos\seguimiento_reclamos\web\bin\web.dll
 C:\Users\Wendy\Documents\GitHub\NATURECLAMOS\natu_reclamos\seguimiento_reclamos\web\bin\web.pdb
