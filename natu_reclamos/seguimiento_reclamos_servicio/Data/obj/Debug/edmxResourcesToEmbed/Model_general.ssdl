@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model_general.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tbl_parametros_correo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="correo_cuenta" Type="varchar" MaxLength="300" Nullable="false" />
+    <Property Name="correo_cuenta_destinatario" Type="varchar" MaxLength="5000" Nullable="false" />
+    <Property Name="correo_contrasenia" Type="varchar" MaxLength="300" Nullable="false" />
+    <Property Name="correo_asunto" Type="varchar" MaxLength="500" />
+    <Property Name="puerto" Type="int" Nullable="false" />
+    <Property Name="host" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="permitir_ssl" Type="bit" Nullable="false" />
+    <Property Name="enviar_correo_al_guardar_queja" Type="bit" Nullable="false" />
+    <Property Name="ftp_usuario" Type="varchar" MaxLength="200" />
+    <Property Name="ftp_contrasenia" Type="varchar" MaxLength="200" />
+    <Property Name="ftp_url" Type="varchar" MaxLength="400" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DB_QUEJAS.dbo.vwtbl_queja_alerta' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="vwtbl_queja_alerta">
+    <Key>
+      <PropertyRef Name="IdRow" />
+      <PropertyRef Name="IdQueja" />
+      <PropertyRef Name="me_descripcion" />
+      <PropertyRef Name="de_descripcion" />
+      <PropertyRef Name="qt_descripcion" />
+      <PropertyRef Name="qm_descripcion" />
+      <PropertyRef Name="su_descripcion" />
+      <PropertyRef Name="qc_descripcion" />
+      <PropertyRef Name="qe_descripcion" />
+      <PropertyRef Name="qo_descripcion" />
+      <PropertyRef Name="estado" />
+      <PropertyRef Name="qu_fecha" />
+    </Key>
+    <Property Name="IdRow" Type="bigint" Nullable="false" />
+    <Property Name="IdQueja" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="me_descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="de_descripcion" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="qt_descripcion" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="qm_descripcion" Type="varchar" MaxLength="1000" Nullable="false" />
+    <Property Name="su_descripcion" Type="varchar" MaxLength="1000" Nullable="false" />
+    <Property Name="qc_descripcion" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="qe_descripcion" Type="varchar" MaxLength="1000" Nullable="false" />
+    <Property Name="qo_descripcion" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="estado" Type="bit" Nullable="false" />
+    <Property Name="qu_fecha" Type="datetime" Nullable="false" />
+    <Property Name="dias_sin_atencion" Type="int" />
+  </EntityType>
+  <EntityContainer Name="Model_generalStoreContainer">
+    <EntitySet Name="tbl_parametros_correo" EntityType="Self.tbl_parametros_correo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="vwtbl_queja_alerta" EntityType="Self.vwtbl_queja_alerta" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vwtbl_queja_alerta].[IdRow] AS [IdRow], 
+    [vwtbl_queja_alerta].[IdQueja] AS [IdQueja], 
+    [vwtbl_queja_alerta].[me_descripcion] AS [me_descripcion], 
+    [vwtbl_queja_alerta].[de_descripcion] AS [de_descripcion], 
+    [vwtbl_queja_alerta].[qt_descripcion] AS [qt_descripcion], 
+    [vwtbl_queja_alerta].[qm_descripcion] AS [qm_descripcion], 
+    [vwtbl_queja_alerta].[su_descripcion] AS [su_descripcion], 
+    [vwtbl_queja_alerta].[qc_descripcion] AS [qc_descripcion], 
+    [vwtbl_queja_alerta].[qe_descripcion] AS [qe_descripcion], 
+    [vwtbl_queja_alerta].[qo_descripcion] AS [qo_descripcion], 
+    [vwtbl_queja_alerta].[estado] AS [estado], 
+    [vwtbl_queja_alerta].[qu_fecha] AS [qu_fecha], 
+    [vwtbl_queja_alerta].[dias_sin_atencion] AS [dias_sin_atencion]
+    FROM [dbo].[vwtbl_queja_alerta] AS [vwtbl_queja_alerta]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

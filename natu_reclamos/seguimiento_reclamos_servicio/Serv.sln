@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Info", "Info\Info.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{FF5A9D38-18C2-4039-8CA0-029EC161E453}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "FixedCorreosMejorasSetup", "FixedCorreosMejorasSetup\FixedCorreosMejorasSetup.vdproj", "{64400F47-C93E-4406-8C80-FC7A294AEC82}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CD_ROM|Any CPU = CD_ROM|Any CPU
@@ -48,6 +50,11 @@ Global
 		{FF5A9D38-18C2-4039-8CA0-029EC161E453}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FF5A9D38-18C2-4039-8CA0-029EC161E453}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
 		{FF5A9D38-18C2-4039-8CA0-029EC161E453}.SingleImage|Any CPU.Build.0 = Release|Any CPU
+		{64400F47-C93E-4406-8C80-FC7A294AEC82}.CD_ROM|Any CPU.ActiveCfg = Release
+		{64400F47-C93E-4406-8C80-FC7A294AEC82}.Debug|Any CPU.ActiveCfg = Debug
+		{64400F47-C93E-4406-8C80-FC7A294AEC82}.DVD-5|Any CPU.ActiveCfg = Debug
+		{64400F47-C93E-4406-8C80-FC7A294AEC82}.Release|Any CPU.ActiveCfg = Release
+		{64400F47-C93E-4406-8C80-FC7A294AEC82}.SingleImage|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

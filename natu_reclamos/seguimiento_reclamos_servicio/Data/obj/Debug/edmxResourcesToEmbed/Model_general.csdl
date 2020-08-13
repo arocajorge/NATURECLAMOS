@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model_general" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tbl_parametros_correo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="correo_cuenta" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="correo_cuenta_destinatario" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="correo_contrasenia" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="correo_asunto" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="puerto" Type="Int32" Nullable="false" />
+    <Property Name="host" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="permitir_ssl" Type="Boolean" Nullable="false" />
+    <Property Name="enviar_correo_al_guardar_queja" Type="Boolean" Nullable="false" />
+    <Property Name="ftp_usuario" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="ftp_contrasenia" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="ftp_url" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="vwtbl_queja_alerta">
+    <Key>
+      <PropertyRef Name="IdRow" />
+      <PropertyRef Name="IdQueja" />
+      <PropertyRef Name="me_descripcion" />
+      <PropertyRef Name="de_descripcion" />
+      <PropertyRef Name="qt_descripcion" />
+      <PropertyRef Name="qm_descripcion" />
+      <PropertyRef Name="su_descripcion" />
+      <PropertyRef Name="qc_descripcion" />
+      <PropertyRef Name="qe_descripcion" />
+      <PropertyRef Name="qo_descripcion" />
+      <PropertyRef Name="estado" />
+      <PropertyRef Name="qu_fecha" />
+    </Key>
+    <Property Name="IdRow" Type="Int64" Nullable="false" />
+    <Property Name="IdQueja" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="me_descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="de_descripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="qt_descripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="qm_descripcion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="su_descripcion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="qc_descripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="qe_descripcion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="qo_descripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="estado" Type="Boolean" Nullable="false" />
+    <Property Name="qu_fecha" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="dias_sin_atencion" Type="Int32" />
+  </EntityType>
+  <EntityContainer Name="Entities_general" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tbl_parametros_correo" EntityType="Self.tbl_parametros_correo" />
+    <EntitySet Name="vwtbl_queja_alerta" EntityType="Self.vwtbl_queja_alerta" />
+  </EntityContainer>
+</Schema>

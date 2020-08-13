@@ -1,0 +1,12 @@
+C:\Users\aroca\Documents\GitHub\NATURECLAMOS\natu_reclamos\seguimiento_reclamos_servicio\Data\bin\Debug\Data.dll.config
+C:\Users\aroca\Documents\GitHub\NATURECLAMOS\natu_reclamos\seguimiento_reclamos_servicio\Data\bin\Debug\Data.dll
+C:\Users\aroca\Documents\GitHub\NATURECLAMOS\natu_reclamos\seguimiento_reclamos_servicio\Data\bin\Debug\Data.pdb
+C:\Users\aroca\Documents\GitHub\NATURECLAMOS\natu_reclamos\seguimiento_reclamos_servicio\Data\bin\Debug\EntityFramework.dll
+C:\Users\aroca\Documents\GitHub\NATURECLAMOS\natu_reclamos\seguimiento_reclamos_servicio\Data\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\aroca\Documents\GitHub\NATURECLAMOS\natu_reclamos\seguimiento_reclamos_servicio\Data\bin\Debug\Info.dll
+C:\Users\aroca\Documents\GitHub\NATURECLAMOS\natu_reclamos\seguimiento_reclamos_servicio\Data\bin\Debug\Info.pdb
+C:\Users\aroca\Documents\GitHub\NATURECLAMOS\natu_reclamos\seguimiento_reclamos_servicio\Data\bin\Debug\EntityFramework.xml
+C:\Users\aroca\Documents\GitHub\NATURECLAMOS\natu_reclamos\seguimiento_reclamos_servicio\Data\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\aroca\Documents\GitHub\NATURECLAMOS\natu_reclamos\seguimiento_reclamos_servicio\Data\obj\Debug\Data.csprojResolveAssemblyReference.cache
+C:\Users\aroca\Documents\GitHub\NATURECLAMOS\natu_reclamos\seguimiento_reclamos_servicio\Data\obj\Debug\Data.dll
+C:\Users\aroca\Documents\GitHub\NATURECLAMOS\natu_reclamos\seguimiento_reclamos_servicio\Data\obj\Debug\Data.pdb

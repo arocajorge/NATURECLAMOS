@@ -32,7 +32,7 @@
             // ServicioAlertaMejoras
             // 
             this.CanShutdown = true;
-            this.ServiceName = "ServicioAlertaMejoras";
+            this.ServiceName = "FixedServicioAlertaMejoras";
 
         }
 

@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Model_generalStoreContainer" CdmEntityContainer="Entities_general">
+    <EntitySetMapping Name="tbl_parametros_correo">
+      <EntityTypeMapping TypeName="Model_general.tbl_parametros_correo">
+        <MappingFragment StoreEntitySet="tbl_parametros_correo">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="correo_cuenta" ColumnName="correo_cuenta" />
+          <ScalarProperty Name="correo_cuenta_destinatario" ColumnName="correo_cuenta_destinatario" />
+          <ScalarProperty Name="correo_contrasenia" ColumnName="correo_contrasenia" />
+          <ScalarProperty Name="correo_asunto" ColumnName="correo_asunto" />
+          <ScalarProperty Name="puerto" ColumnName="puerto" />
+          <ScalarProperty Name="host" ColumnName="host" />
+          <ScalarProperty Name="permitir_ssl" ColumnName="permitir_ssl" />
+          <ScalarProperty Name="enviar_correo_al_guardar_queja" ColumnName="enviar_correo_al_guardar_queja" />
+          <ScalarProperty Name="ftp_usuario" ColumnName="ftp_usuario" />
+          <ScalarProperty Name="ftp_contrasenia" ColumnName="ftp_contrasenia" />
+          <ScalarProperty Name="ftp_url" ColumnName="ftp_url" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwtbl_queja_alerta">
+      <EntityTypeMapping TypeName="Model_general.vwtbl_queja_alerta">
+        <MappingFragment StoreEntitySet="vwtbl_queja_alerta">
+          <ScalarProperty Name="IdRow" ColumnName="IdRow" />
+          <ScalarProperty Name="IdQueja" ColumnName="IdQueja" />
+          <ScalarProperty Name="me_descripcion" ColumnName="me_descripcion" />
+          <ScalarProperty Name="de_descripcion" ColumnName="de_descripcion" />
+          <ScalarProperty Name="qt_descripcion" ColumnName="qt_descripcion" />
+          <ScalarProperty Name="qm_descripcion" ColumnName="qm_descripcion" />
+          <ScalarProperty Name="su_descripcion" ColumnName="su_descripcion" />
+          <ScalarProperty Name="qc_descripcion" ColumnName="qc_descripcion" />
+          <ScalarProperty Name="qe_descripcion" ColumnName="qe_descripcion" />
+          <ScalarProperty Name="qo_descripcion" ColumnName="qo_descripcion" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="qu_fecha" ColumnName="qu_fecha" />
+          <ScalarProperty Name="dias_sin_atencion" ColumnName="dias_sin_atencion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
